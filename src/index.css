@@ -5891,19 +5891,12 @@ html, body, #root {
 
   /* 3. 3D Rotating Square Dice Experience Carousel on Mobile */
   .experience-card.card-3d.exp-dice-face {
-    width: 380px !important;
-    max-width: 90vw !important;
+    width: 90vw !important;
+    max-width: 350px !important;
+    height: auto !important;
     min-height: 240px !important;
-    max-height: 280px !important;
-    padding: 0.95rem 1.2rem !important;
-  }
-
-  .exp-dice-face.exp-face-0 {
-    transform: rotateY(0deg) translateZ(160px) !important;
-  }
-
-  .exp-dice-face.exp-face-1 {
-    transform: rotateY(90deg) translateZ(160px) !important;
+    max-height: 310px !important;
+    padding: 0.9rem 1.1rem !important;
   }
 
   .exp-role-title {
