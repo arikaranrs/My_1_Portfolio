@@ -297,9 +297,13 @@ function CameraController({ loadingState }) {
       }
 
       const idleTime = time;
+      const isMobile = window.innerWidth <= 480;
+      const isTablet = window.innerWidth <= 768;
+      const targetZ = isMobile ? 14.5 : isTablet ? 12.5 : 10.5;
+
       camera.position.x += (Math.sin(idleTime * 0.4) * 0.25 - camera.position.x) * 0.08;
       camera.position.y += (Math.cos(idleTime * 0.3) * 0.15 - camera.position.y) * 0.08;
-      camera.position.z += (10.5 - camera.position.z) * 0.08;
+      camera.position.z += (targetZ - camera.position.z) * 0.08;
       camera.lookAt(0, 0, 0);
     }
   });
@@ -1473,7 +1477,7 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const distanceFactor = viewportWidth <= 420 ? 8.2 : viewportWidth <= 768 ? 7.2 : 6.2;
+  const distanceFactor = viewportWidth <= 480 ? 5.8 : viewportWidth <= 768 ? 6.0 : 6.2;
 
   useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
