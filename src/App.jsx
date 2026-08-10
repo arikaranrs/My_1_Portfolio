@@ -299,7 +299,15 @@ function CameraController({ loadingState }) {
       const idleTime = time;
       const isMobile = window.innerWidth <= 480;
       const isTablet = window.innerWidth <= 768;
-      const targetZ = isMobile ? 14.5 : isTablet ? 12.5 : 10.5;
+      const targetZ = isMobile ? 18.0 : isTablet ? 13.5 : 10.5;
+
+      if (isMobile && camera.fov !== 85) {
+        camera.fov = 85;
+        camera.updateProjectionMatrix();
+      } else if (!isMobile && camera.fov !== 75) {
+        camera.fov = 75;
+        camera.updateProjectionMatrix();
+      }
 
       camera.position.x += (Math.sin(idleTime * 0.4) * 0.25 - camera.position.x) * 0.08;
       camera.position.y += (Math.cos(idleTime * 0.3) * 0.15 - camera.position.y) * 0.08;
@@ -1830,7 +1838,7 @@ export default function App() {
       trigger: ".content",
       start: "top top",
       end: "bottom bottom",
-      scrub: 1.6,
+      scrub: window.innerWidth <= 768 ? 0.3 : 1.6,
       onUpdate: (self) => {
         const p = self.progress;
         scrollState.current.y = -18 + p * 40;
