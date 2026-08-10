@@ -297,14 +297,9 @@ function CameraController({ loadingState }) {
       }
 
       const idleTime = time;
-      const isMobile = window.innerWidth <= 480;
-      const isTablet = window.innerWidth <= 768;
-      const targetZ = isMobile ? 15.2 : isTablet ? 12.8 : 10.5;
+      const targetZ = window.innerWidth <= 768 ? 12.5 : 10.5;
 
-      if (isMobile && camera.fov !== 80) {
-        camera.fov = 80;
-        camera.updateProjectionMatrix();
-      } else if (!isMobile && camera.fov !== 75) {
+      if (camera.fov !== 75) {
         camera.fov = 75;
         camera.updateProjectionMatrix();
       }
