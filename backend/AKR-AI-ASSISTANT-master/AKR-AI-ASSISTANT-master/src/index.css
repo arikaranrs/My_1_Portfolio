@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 40% 5%;
+    --foreground: 180 100% 90%;
+
+    --card: 220 35% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 220 40% 6%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 40% 5%;
+    --primary-glow: 180 100% 70%;
+
+    --secondary: 260 100% 60%;
+    --secondary-foreground: 180 100% 90%;
+    --secondary-glow: 260 100% 80%;
+
+    --muted: 220 30% 15%;
+    --muted-foreground: 180 50% 60%;
+
+    --accent: 280 100% 60%;
+    --accent-foreground: 180 100% 90%;
+    --accent-glow: 280 100% 80%;
+
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 180 100% 90%;
+
+    --border: 220 30% 18%;
+    --input: 220 35% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 1rem;
+
+    /* Cyberpunk gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 100% 50%), hsl(200 100% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(260 100% 60%), hsl(280 100% 70%));
+    --gradient-accent: linear-gradient(135deg, hsl(180 100% 40%), hsl(260 100% 50%));
+    --gradient-glow: radial-gradient(circle, hsl(180 100% 50% / 0.3), transparent);
+
+    /* Shadows & Glows */
+    --shadow-neon: 0 0 20px hsl(180 100% 50% / 0.5), 0 0 40px hsl(180 100% 50% / 0.3);
+    --shadow-neon-strong: 0 0 30px hsl(180 100% 50% / 0.8), 0 0 60px hsl(180 100% 50% / 0.5);
+    --shadow-purple: 0 0 20px hsl(260 100% 60% / 0.5), 0 0 40px hsl(260 100% 60% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

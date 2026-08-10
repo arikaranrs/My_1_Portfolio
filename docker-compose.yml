@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  kira-ai-backend:
+    build:
+      context: ./backend/AKR-AI-ASSISTANT-master/AKR-AI-ASSISTANT-master/backend
+      dockerfile: Dockerfile
+    container_name: kira-ai-assistant-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - FLASK_ENV=production
+      - ALLOWED_ORIGINS=*
+      - SECRET_KEY=kira-portfolio-ai-secret-key
+    restart: always
