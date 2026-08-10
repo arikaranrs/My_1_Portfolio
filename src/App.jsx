@@ -1473,7 +1473,11 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const distanceFactor = viewportWidth <= 420 ? 8.2 : viewportWidth <= 768 ? 7.2 : 6.2;
+  // Responsive 3D Html card scale factor:
+  // Desktop (> 768px): 6.2 (100% original scale)
+  // Tablet (421px - 768px): 5.2 (proportionally scaled for tablets)
+  // Mobile (<= 420px): 4.4 (proportionally scaled to fit 320px-430px screens with zero clipping)
+  const distanceFactor = viewportWidth <= 420 ? 4.4 : viewportWidth <= 768 ? 5.2 : 6.2;
 
   useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
