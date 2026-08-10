@@ -1465,6 +1465,16 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
   const pointsRef = useRef();
   const linesRef = useRef();
 
+  const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const distanceFactor = viewportWidth <= 420 ? 8.2 : viewportWidth <= 768 ? 7.2 : 6.2;
+
   useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
       worldGroupRef.current.position.y += (scrollState.current.y - worldGroupRef.current.position.y) * 0.08;
@@ -1567,7 +1577,7 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
             <Html 
               transform 
               center 
-              distanceFactor={6.2} 
+              distanceFactor={distanceFactor} 
               pointerEvents="auto"
             >
               {sec.isExperienceCarousel ? (

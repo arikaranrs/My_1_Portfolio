@@ -5843,6 +5843,298 @@ body.loading-locked {
   transform: translateX(-4px);
 }
 
+/* =========================================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS SYSTEM (320px – 768px)
+   Strictly preserves desktop design while optimizing mobile layouts,
+   preventing horizontal scroll, and scaling elements proportionally.
+   ========================================================================= */
+
+/* Global Viewport Containment for Mobile */
+html, body, #root {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  /* 1. Universal Layout Containment */
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Responsive Media Scaling */
+  img, video, canvas, svg {
+    max-width: 100% !important;
+    height: auto;
+  }
+
+  /* 2. Three.js 3D HTML Cards Container Scaling */
+  .card-3d {
+    width: 90vw !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Hero Section Cards & Badges */
+  .hero-card, .skills-card, .projects-card, .voice-card, .contact-card {
+    padding: 1.2rem 1rem !important;
+    width: 92vw !important;
+    max-width: 360px !important;
+  }
+
+  .badge {
+    font-size: 0.65rem !important;
+    padding: 0.2rem 0.6rem !important;
+  }
+
+  /* 3. 3D Rotating Square Dice Experience Carousel on Mobile */
+  .experience-card.card-3d.exp-dice-face {
+    width: 90vw !important;
+    max-width: 350px !important;
+    height: auto !important;
+    min-height: 240px !important;
+    max-height: 310px !important;
+    padding: 0.9rem 1.1rem !important;
+  }
+
+  .exp-role-title {
+    font-size: clamp(0.85rem, 3.8vw, 0.98rem) !important;
+  }
+
+  .exp-description-text {
+    font-size: 0.74rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* 4. KIRA Voice AI Card Mobile Styling */
+  .kira-assistant-card {
+    width: 92vw !important;
+    max-width: 360px !important;
+    padding: 1.1rem 1rem !important;
+  }
+
+  .kira-chat-history {
+    max-height: 220px !important;
+  }
+
+  .kira-input-row {
+    gap: 0.4rem !important;
+  }
+
+  .kira-text-input {
+    font-size: 0.76rem !important;
+    padding: 0.45rem 0.75rem !important;
+  }
+
+  /* 5. Contact Hero Card 2-Column Responsive Layout */
+  .contact-card-body {
+    flex-direction: column !important;
+    gap: 1.2rem !important;
+  }
+
+  .contact-vertical-divider {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 0.4rem 0 !important;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.5), transparent) !important;
+  }
+
+  .contact-left-col,
+  .contact-right-col {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .contact-3d-earth-container {
+    width: 75px !important;
+    height: 75px !important;
+    bottom: -10px !important;
+    left: -10px !important;
+    opacity: 0.18 !important;
+  }
+
+  /* 6. Fullscreen About Page Mobile Layout */
+  .about-experience-fullscreen {
+    padding: 0 !important;
+  }
+
+  .apple-about-card.liquid-crystal-card {
+    width: 94vw !important;
+    max-width: 100% !important;
+    padding: 1.2rem 1rem !important;
+    margin: 1.5rem auto !important;
+  }
+
+  .apple-profile-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1rem !important;
+  }
+
+  .apple-header-info {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .apple-avatar-img {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .apple-about-name {
+    font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
+  }
+
+  .apple-domain-title-text {
+    font-size: clamp(0.82rem, 3.5vw, 1rem) !important;
+  }
+
+  .apple-about-bio {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+  }
+
+  .resume-viewer-content {
+    width: 96vw !important;
+    height: 88vh !important;
+  }
+
+  /* 7. Fullscreen Projects Page Mobile Layout */
+  .projects-header-section {
+    padding: 0 0.8rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .projects-main-title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem) !important;
+  }
+
+  .projects-filter-bar {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    justify-content: flex-start !important;
+    padding: 0.4rem 0.6rem !important;
+    scrollbar-width: none !important;
+  }
+
+  .projects-filter-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .projects-liquid-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+    padding: 0 0.5rem !important;
+  }
+
+  .project-slab-card {
+    padding: 1.1rem 1rem !important;
+  }
+
+  .slab-title {
+    font-size: 1.1rem !important;
+  }
+
+  .slab-desc {
+    font-size: 0.8rem !important;
+  }
+
+  .project-modal-card {
+    width: 95vw !important;
+    max-height: 90vh !important;
+    padding: 1.2rem 1rem !important;
+  }
+
+  /* 8. Fullscreen Skills Page Mobile Layout */
+  .skills-content-container {
+    padding: 2rem 0.8rem 4rem !important;
+  }
+
+  .skills-main-title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem) !important;
+  }
+
+  .skills-category-tabs {
+    width: 100% !important;
+    gap: 0.4rem !important;
+    padding: 0.35rem !important;
+  }
+
+  .skills-tab-btn {
+    padding: 0.42rem 0.85rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .skills-grid-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .skill-glass-card {
+    padding: 1.1rem 1rem !important;
+  }
+
+  /* 9. Touch Target & Button Enhancements */
+  .hero-click-btn,
+  .explore-skills-btn,
+  .btn-view-resume,
+  .about-experience-btn-back,
+  .skills-btn-back,
+  .projects-btn-back,
+  .top-left-go-back-btn,
+  .slab-btn,
+  .slab-btn-github,
+  .slab-btn-demo,
+  .btn-download-resume {
+    padding: 0.6rem 1.4rem !important;
+    font-size: 0.8rem !important;
+    min-height: 44px !important;
+    touch-action: manipulation !important;
+  }
+
+  /* End Copyright Footer text on mobile */
+  .copyright-colorful-text {
+    font-size: clamp(0.55rem, 2.5vw, 0.75rem) !important;
+    letter-spacing: 0.08em !important;
+  }
+}
+
+/* Extra Small Screens (320px – 390px iPhone SE & Compact Mobile Devices) */
+@media (max-width: 400px) {
+  .experience-card.card-3d.exp-dice-face {
+    width: 92vw !important;
+    max-width: 320px !important;
+    padding: 0.8rem 0.95rem !important;
+  }
+
+  .exp-role-title {
+    font-size: 0.84rem !important;
+  }
+
+  .exp-description-text {
+    font-size: 0.7rem !important;
+  }
+
+  .contact-item-val {
+    font-size: 0.52rem !important;
+  }
+
+  .contact-social-mini-btn {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .skills-badge {
+    font-size: 0.65rem !important;
+    padding: 0.22rem 0.75rem !important;
+  }
+}
+
 
 
 
