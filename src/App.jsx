@@ -299,10 +299,10 @@ function CameraController({ loadingState }) {
       const idleTime = time;
       const isMobile = window.innerWidth <= 480;
       const isTablet = window.innerWidth <= 768;
-      const targetZ = isMobile ? 18.0 : isTablet ? 13.5 : 10.5;
+      const targetZ = isMobile ? 15.2 : isTablet ? 12.8 : 10.5;
 
-      if (isMobile && camera.fov !== 85) {
-        camera.fov = 85;
+      if (isMobile && camera.fov !== 80) {
+        camera.fov = 80;
         camera.updateProjectionMatrix();
       } else if (!isMobile && camera.fov !== 75) {
         camera.fov = 75;
@@ -1485,7 +1485,7 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const distanceFactor = viewportWidth <= 480 ? 5.8 : viewportWidth <= 768 ? 6.0 : 6.2;
+  const distanceFactor = 6.2;
 
   useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
