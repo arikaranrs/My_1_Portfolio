@@ -278,20 +278,28 @@ function CameraController({ loadingState }) {
   const prevStateRef = useRef(loadingState);
 
   useFrame((state) => {
-    const { camera, clock } = state;
+    const { camera, clock, size } = state;
     const time = clock.getElapsedTime();
+    const aspect = size.height > 0 ? size.width / size.height : 1.5;
+
+    // Calculate dynamic camera Z target to compensate for mobile portrait frustum compression
+    const targetZ = size.width <= 480 || aspect < 0.65 
+      ? 19.5 
+      : size.width <= 768 || aspect < 0.85 
+        ? 14.5 
+        : 10.5;
 
     if (loadingState !== 'active') {
       const speed = 0.06;
       const angle = time * speed;
-      const radius = 11.5;
+      const radius = size.width <= 480 || aspect < 0.65 ? 18.5 : 11.5;
       camera.position.x = Math.sin(angle) * radius;
       camera.position.y = Math.cos(time * 0.12) * 1.2;
       camera.position.z = Math.cos(angle) * radius;
       camera.lookAt(0, 0, 0);
     } else {
       if (prevStateRef.current !== 'active') {
-        camera.position.set(0, 0, 12.5);
+        camera.position.set(0, 0, targetZ + 2.0);
         camera.lookAt(0, 0, 0);
         prevStateRef.current = 'active';
       }
@@ -299,7 +307,7 @@ function CameraController({ loadingState }) {
       const idleTime = time;
       camera.position.x += (Math.sin(idleTime * 0.4) * 0.25 - camera.position.x) * 0.08;
       camera.position.y += (Math.cos(idleTime * 0.3) * 0.15 - camera.position.y) * 0.08;
-      camera.position.z += (10.5 - camera.position.z) * 0.08;
+      camera.position.z += (targetZ - camera.position.z) * 0.08;
       camera.lookAt(0, 0, 0);
     }
   });
@@ -1481,12 +1489,7 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const aspect = viewportHeight > 0 ? viewportWidth / viewportHeight : 1.5;
-  const distanceFactor = aspect < 0.65 || viewportWidth <= 420 
-    ? 11.6 
-    : aspect < 0.85 || viewportWidth <= 768 
-      ? 9.4 
-      : 6.2;
+  const distanceFactor = 6.2;
 
   const isMobileMedia = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
   const lerpFactor = isMobileMedia ? 0.12 : 0.08;
