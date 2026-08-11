@@ -5853,14 +5853,6 @@ html, body, #root, .content, .scroll-container {
   scroll-behavior: smooth !important;
 }
 
-/* Pointer Events Optimization during Touch Scroll: Eliminates hover state calculations */
-body.is-scrolling *,
-body.is-scrolling .card-3d,
-body.is-scrolling .contact-social-mini-btn,
-body.is-scrolling .hero-click-btn {
-  pointer-events: none !important;
-}
-
 /* Mobile Footer Social Row - Hidden on Desktop */
 .mobile-footer-social-row {
   display: none;
@@ -5886,21 +5878,15 @@ body.is-scrolling .hero-click-btn {
     backface-visibility: hidden !important;
   }
 
-  /* GPU Paint Optimization: Replace heavy backdrop-filter blur with rich semi-transparent solid colors */
+  /* GPU Paint Optimization: Lightweight backdrop-filter blur for mobile GPUs */
   .card-3d,
+  .experience-card.card-3d.exp-dice-face,
   .kira-assistant-card,
   .apple-about-card.liquid-crystal-card,
   .project-slab-card,
   .skill-glass-card {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(10, 16, 38, 0.96) !important;
-  }
-
-  .experience-card.card-3d.exp-dice-face {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(253, 251, 247, 0.96) !important;
+    backdrop-filter: blur(12px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
   }
 
   /* Hide the Contact Card inline social row on mobile */

@@ -1505,13 +1505,11 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
 
   const distanceFactor = 6.2;
 
-  const isMobileMedia = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
-  const lerpFactor = isMobileMedia ? 0.12 : 0.08;
-
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (worldGroupRef.current && loadingState === 'active') {
-      worldGroupRef.current.position.y += (scrollState.current.y - worldGroupRef.current.position.y) * lerpFactor;
-      worldGroupRef.current.rotation.y += (scrollState.current.rotationOffset - worldGroupRef.current.rotation.y) * lerpFactor;
+      const lambda = isMobileMedia ? 12 : 9;
+      worldGroupRef.current.position.y = THREE.MathUtils.damp(worldGroupRef.current.position.y, scrollState.current.y, lambda, delta);
+      worldGroupRef.current.rotation.y = THREE.MathUtils.damp(worldGroupRef.current.rotation.y, scrollState.current.rotationOffset, lambda, delta);
     }
   });
 
@@ -1817,41 +1815,16 @@ export default function App() {
     };
   }, []);
 
-  // Pointer-events scroll trick: Bypasses hover calculations during touch scroll for 60fps performance
-  useEffect(() => {
-    let scrollTimer;
-    const handleScrollState = () => {
-      if (!document.body.classList.contains('is-scrolling')) {
-        document.body.classList.add('is-scrolling');
-      }
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        document.body.classList.remove('is-scrolling');
-      }, 150);
-    };
-
-    window.addEventListener('scroll', handleScrollState, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScrollState);
-      clearTimeout(scrollTimer);
-    };
-  }, []);
+  const [showSocialFooter, setShowSocialFooter] = useState(false);
 
   // GSAP ScrollTrigger connection & exact scroll restoration
   useEffect(() => {
     if (loadingState !== 'active' || currentPage !== 'hero') return;
 
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     const restoreY = savedHeroScrollY.current;
-
-    const updateFooterVisibility = (isVisible) => {
-      const footerEl = document.querySelector('.hero-copyright-footer');
-      if (footerEl) {
-        if (isVisible) footerEl.classList.add('visible');
-        else footerEl.classList.remove('visible');
-      }
-    };
 
     // Helper to calculate 3D helical position from current scroll Y
     const sync3DHelicalPosition = (yPos) => {
@@ -1862,7 +1835,7 @@ export default function App() {
         scrollState.current.y = -18 + p * 40;
         scrollState.current.rotationOffset = -p * Math.PI * 2;
       }
-      updateFooterVisibility(p >= 0.80);
+      setShowSocialFooter(p >= 0.80);
     };
 
     let scrollTicking = false;
@@ -1872,7 +1845,7 @@ export default function App() {
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
           if (maxScroll > 0) {
             const p = window.scrollY / maxScroll;
-            updateFooterVisibility(p >= 0.80);
+            setShowSocialFooter(p >= 0.80);
           }
           scrollTicking = false;
         });
@@ -1900,7 +1873,7 @@ export default function App() {
         const p = self.progress;
         scrollState.current.y = -18 + p * 40;
         scrollState.current.rotationOffset = -p * Math.PI * 2;
-        updateFooterVisibility(p >= 0.80);
+        setShowSocialFooter(p >= 0.80);
       }
     });
 
@@ -2051,8 +2024,6 @@ export default function App() {
       >
         <Canvas 
           frameloop={currentPage === 'hero' ? 'always' : 'never'}
-          dpr={typeof window !== 'undefined' && window.innerWidth <= 768 ? 1 : [1, 1.5]}
-          gl={{ powerPreference: "high-performance", antialias: true }}
           camera={{ position: [0, 0, 10.5], fov: 45, near: 0.1, far: 1000 }}
         >
           <ambientLight intensity={0.95} color="#e5ded4" />
