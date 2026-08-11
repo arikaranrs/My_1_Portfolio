@@ -5879,22 +5879,45 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
+  /* 1. Main Mobile Wrapper: Spaced Flex Column System */
+  .mobile-static-portfolio-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15vh !important;
+    position: relative !important;
+    align-items: center !important;
+    padding-top: 10vh !important;
+    padding-bottom: 15vh !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    width: 100% !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    z-index: 10 !important;
+  }
+
+  /* 2. Target EVERY individual card: Strip absolute positioning into regular document flow */
   .mobile-static-portfolio-wrapper .card-3d,
   .mobile-static-portfolio-wrapper .hero-card,
   .mobile-static-portfolio-wrapper .projects-card,
-  .mobile-static-portfolio-wrapper .skills-card {
-    width: 90vw !important;
-    max-width: 360px !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
+  .mobile-static-portfolio-wrapper .skills-card,
+  .mobile-static-portfolio-wrapper .experience-card,
+  .mobile-static-portfolio-wrapper .kira-assistant-card,
+  .mobile-static-portfolio-wrapper .contact-card {
     position: relative !important;
+    transform: none !important;
+    -webkit-transform: none !important;
     top: auto !important;
     left: auto !important;
-    transform: none !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 auto !important;
     opacity: 1 !important;
     visibility: visible !important;
-    display: flex !important;
-    flex-direction: column !important;
+    z-index: 10 !important;
+    max-width: 90vw !important;
+    width: 90vw !important;
+    box-sizing: border-box !important;
   }
 
   /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
