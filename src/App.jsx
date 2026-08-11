@@ -2016,6 +2016,18 @@ export default function App() {
     return new THREE.CanvasTexture(canvas);
   }, []);
 
+  const [isMobileDevice, setIsMobileDevice] = useState(
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false
+  );
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileDevice(window.matchMedia('(max-width: 768px)').matches);
+    };
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <>
       <div 
@@ -2026,6 +2038,12 @@ export default function App() {
         <Canvas 
           frameloop={currentPage === 'hero' ? 'always' : 'never'}
           camera={{ position: [0, 0, 10.5], fov: 45, near: 0.1, far: 1000 }}
+          gl={{ 
+            powerPreference: 'high-performance', 
+            antialias: !isMobileDevice,
+            precision: isMobileDevice ? 'mediump' : 'highp'
+          }}
+          dpr={isMobileDevice ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2)}
         >
           <ambientLight intensity={0.95} color="#e5ded4" />
           <pointLight position={[6, 12, 6]} intensity={1.8} color="#ffdca3" />
@@ -2068,13 +2086,15 @@ export default function App() {
 
           <CameraController loadingState={loadingState} />
 
-          <EffectComposer>
-            <Bloom 
-              luminanceThreshold={0.15} 
-              luminanceSmoothing={0.9} 
-              intensity={1.2} 
-            />
-          </EffectComposer>
+          {!isMobileDevice && (
+            <EffectComposer>
+              <Bloom 
+                luminanceThreshold={0.15} 
+                luminanceSmoothing={0.9} 
+                intensity={1.2} 
+              />
+            </EffectComposer>
+          )}
         </Canvas>
       </div>
 

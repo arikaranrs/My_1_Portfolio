@@ -5847,10 +5847,10 @@ body.loading-locked {
    COMPREHENSIVE MOBILE RESPONSIVENESS SYSTEM (320px – 768px)
    Strictly preserves desktop design while optimizing mobile layouts,
    preventing horizontal scroll, and scaling elements proportionally.
-/* Native Touch Momentum Smooth Scrolling */
-html, body, #root, .content, .scroll-container {
+/* Native Touch Momentum Smooth Scrolling & Panning Control */
+html, body, #root, .content, .scroll-container, #canvas-container, canvas {
   -webkit-overflow-scrolling: touch !important;
-  scroll-behavior: smooth !important;
+  touch-action: pan-y !important;
 }
 
 /* Mobile Footer Social Row - Hidden on Desktop */
