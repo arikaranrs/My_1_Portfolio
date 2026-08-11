@@ -1597,7 +1597,7 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
         </lineSegments>
       )}
 
-      {loadingState === 'active' && sectionsData.map((sec) => {
+      {loadingState === 'active' && !isMobileMedia && sectionsData.map((sec) => {
         const cx = Math.sin(sec.theta) * cardsRadius;
         const cz = Math.cos(sec.theta) * cardsRadius;
 
