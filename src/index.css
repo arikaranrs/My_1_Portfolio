@@ -5863,49 +5863,15 @@ body.loading-locked {
   background-color: transparent !important;
 }
 
-/* Mobile Static Cards Container System (100% Transparent Background Layer) */
-.mobile-static-portfolio-wrapper {
-  background: transparent !important;
-  background-color: transparent !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 2.2rem !important;
-  width: 100% !important;
-  padding: 1.5rem 0.8rem 4rem !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  z-index: 10 !important;
-}
-
 @media (max-width: 768px) {
-  /* 1. Main Mobile Wrapper: Fluid Centered Flex Column System */
-  .mobile-static-portfolio-wrapper {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: clamp(2.5rem, 7vh, 5.5rem) !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-top: clamp(2rem, 6vh, 4rem) !important;
-    padding-bottom: clamp(3rem, 8vh, 6rem) !important;
-    position: relative !important;
-    z-index: 10 !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 2. Target EVERY individual card: Fluid clamp() sizing fitting exact device dimensions */
-  .mobile-static-portfolio-wrapper .card-3d,
-  .mobile-static-portfolio-wrapper .hero-card,
-  .mobile-static-portfolio-wrapper .projects-card,
-  .mobile-static-portfolio-wrapper .skills-card,
-  .mobile-static-portfolio-wrapper .experience-card,
-  .mobile-static-portfolio-wrapper .kira-assistant-card,
-  .mobile-static-portfolio-wrapper .contact-card,
-  .card-3d {
+  /* Dynamic Viewport-Aware Responsive Cards for Mobile */
+  .card-3d,
+  .hero-card,
+  .skills-card,
+  .projects-card,
+  .experience-card,
+  .kira-assistant-card,
+  .contact-card {
     position: relative !important;
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;

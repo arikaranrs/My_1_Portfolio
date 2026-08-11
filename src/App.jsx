@@ -1597,7 +1597,7 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
         </lineSegments>
       )}
 
-      {loadingState === 'active' && !isMobileMedia && sectionsData.map((sec) => {
+      {loadingState === 'active' && sectionsData.map((sec) => {
         const cx = Math.sin(sec.theta) * cardsRadius;
         const cz = Math.cos(sec.theta) * cardsRadius;
 
@@ -1678,15 +1678,6 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
     </group>
   );
 }
-
-const PORTFOLIO_SECTIONS = [
-  { id: 'hero', badge: '✦ IMMERSIVE 3D', title: 'ABOUT', desc: 'Click below to warp into my full profile experience.', isHero: true },
-  { id: 'skills', badge: '🚀 FEATURED WORK', title: 'PROJECTS', desc: 'Explore my AI, Machine Learning, Data Analytics, and Full Stack projects through an immersive cinematic experience.', isProjects: true },
-  { id: 'projects', badge: '✦ WARP TUNNEL', title: 'SKILLS', desc: 'Explore my full Artificial Intelligence, Deep Learning, Machine Learning, and Data Analytics skillset.', isSkillsWarp: true },
-  { id: 'experience', badge: '⧫ CHRONOLOGY', title: 'EXPERIENCE', isExperienceCarousel: true },
-  { id: 'voice', badge: '◉ KIRA VOICE', title: 'Pulse Sphere', desc: 'An interactive pulse waveform showing off voice assistant integrations.' },
-  { id: 'contact', badge: '✧ CONNECT', title: 'Gravity Vortex', desc: 'Spin into our orbital path. Click to connect via GitHub, LinkedIn, or Email.', isContact: true }
-];
 
 // --- MAIN PORTFOLIO ROOT ---
 
@@ -2168,56 +2159,17 @@ export default function App() {
       />
 
       {loadingState === 'active' && currentPage === 'hero' && (
-        isMobile ? (
-          /* SINGLE SOURCE OF TRUTH MOBILE CARDS (Portrait Clone Duplicate Dropped) */
-          <div className="mobile-static-portfolio-wrapper" style={{ background: 'transparent', backgroundColor: 'transparent' }}>
-            {PORTFOLIO_SECTIONS.map((sec) => (
-              <React.Fragment key={sec.id}>
-                {sec.isExperienceCarousel ? (
-                  <Experience3DCarousel />
-                ) : sec.id === 'voice' ? (
-                  <KiraAssistantCard />
-                ) : sec.isContact ? (
-                  <ContactHeroCard />
-                ) : (
-                  <div className={`card-3d ${sec.id}-card`}>
-                    <div className="badge">{sec.badge}</div>
-                    <h2>{sec.title}</h2>
-                    <p>{sec.desc}</p>
-                    {sec.isProjects ? (
-                      <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("projects"), e, true)}>
-                        CLICK HERE
-                      </button>
-                    ) : sec.isSkillsWarp ? (
-                      <button className="hero-click-btn explore-skills-btn" onClick={(e) => playExplosion(() => setCurrentPage("skills"), e, true)}>
-                        EXPLORE SKILLS
-                      </button>
-                    ) : (
-                      <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("about"), e, true)}>
-                        CLICK HERE
-                      </button>
-                    )}
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
-
-            <HeroCopyrightFooter isVisible={true} />
+        <>
+          <div className="content">
+            <section style={{ height: '100vh' }}></section>
+            <section style={{ height: '100vh' }}></section>
+            <section style={{ height: '100vh' }}></section>
+            <section style={{ height: '100vh' }}></section>
+            <section style={{ height: '100vh' }}></section>
+            <section style={{ height: '100vh' }}></section>
           </div>
-        ) : (
-          /* DESKTOP 3D HELICAL SCROLL ENGINE: 100% untouched original desktop experience */
-          <>
-            <div className="content">
-              <section style={{ height: '100vh' }}></section>
-              <section style={{ height: '100vh' }}></section>
-              <section style={{ height: '100vh' }}></section>
-              <section style={{ height: '100vh' }}></section>
-              <section style={{ height: '100vh' }}></section>
-              <section style={{ height: '100vh' }}></section>
-            </div>
-            <HeroCopyrightFooter isVisible={showSocialFooter} />
-          </>
-        )
+          <HeroCopyrightFooter isVisible={showSocialFooter} />
+        </>
       )}
     </>
   );
