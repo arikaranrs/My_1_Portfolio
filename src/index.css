@@ -5850,8 +5850,23 @@ body.loading-locked {
    preventing horizontal scroll, and scaling elements proportionally.
    ========================================================================= */
 
-/* Mobile Static Cards Container System (Bypasses 3D Scroll Mounting Trap) */
+/* Lock WebGL Cinematic Background Canvas to Fixed Layer Behind DOM */
+#canvas-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Mobile Static Cards Container System (100% Transparent Background Layer) */
 .mobile-static-portfolio-wrapper {
+  background: transparent !important;
+  background-color: transparent !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
