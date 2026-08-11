@@ -2161,7 +2161,7 @@ export default function App() {
       {loadingState === 'active' && currentPage === 'hero' && (
         isMobile ? (
           /* MOBILE STATIC FALLBACK: Renders all 6 cards in a clean, static, high-performance DOM stack */
-          <div className="mobile-static-portfolio-wrapper">
+          <div className="mobile-static-portfolio-wrapper" style={{ background: 'transparent', backgroundColor: 'transparent' }}>
             <div className="card-3d hero-card">
               <div className="badge">✦ IMMERSIVE 3D</div>
               <h2>ABOUT</h2>
