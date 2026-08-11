@@ -5847,11 +5847,18 @@ body.loading-locked {
    COMPREHENSIVE MOBILE RESPONSIVENESS SYSTEM (320px – 768px)
    Strictly preserves desktop design while optimizing mobile layouts,
    preventing horizontal scroll, and scaling elements proportionally.
-/* Native Touch Momentum Smooth Scrolling & Touch Gesture Pass-through */
-html, body, #root, .content, .scroll-container, #canvas-container, canvas {
+/* Native Touch Momentum Smooth Scrolling */
+html, body, #root, .content, .scroll-container {
   -webkit-overflow-scrolling: touch !important;
   scroll-behavior: smooth !important;
-  touch-action: pan-y !important;
+}
+
+/* Pointer Events Optimization during Touch Scroll: Eliminates hover state calculations */
+body.is-scrolling *,
+body.is-scrolling .card-3d,
+body.is-scrolling .contact-social-mini-btn,
+body.is-scrolling .hero-click-btn {
+  pointer-events: none !important;
 }
 
 /* Mobile Footer Social Row - Hidden on Desktop */
@@ -5879,15 +5886,21 @@ html, body, #root, .content, .scroll-container, #canvas-container, canvas {
     backface-visibility: hidden !important;
   }
 
-  /* GPU Paint Optimization: Lightweight backdrop-filter blur for mobile GPUs */
+  /* GPU Paint Optimization: Replace heavy backdrop-filter blur with rich semi-transparent solid colors */
   .card-3d,
-  .experience-card.card-3d.exp-dice-face,
   .kira-assistant-card,
   .apple-about-card.liquid-crystal-card,
   .project-slab-card,
   .skill-glass-card {
-    backdrop-filter: blur(12px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 16, 38, 0.96) !important;
+  }
+
+  .experience-card.card-3d.exp-dice-face {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(253, 251, 247, 0.96) !important;
   }
 
   /* Hide the Contact Card inline social row on mobile */

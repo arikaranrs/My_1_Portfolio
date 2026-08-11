@@ -1817,7 +1817,25 @@ export default function App() {
     };
   }, []);
 
-  const [showSocialFooter, setShowSocialFooter] = useState(false);
+  // Pointer-events scroll trick: Bypasses hover calculations during touch scroll for 60fps performance
+  useEffect(() => {
+    let scrollTimer;
+    const handleScrollState = () => {
+      if (!document.body.classList.contains('is-scrolling')) {
+        document.body.classList.add('is-scrolling');
+      }
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        document.body.classList.remove('is-scrolling');
+      }, 150);
+    };
+
+    window.addEventListener('scroll', handleScrollState, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScrollState);
+      clearTimeout(scrollTimer);
+    };
+  }, []);
 
   // GSAP ScrollTrigger connection & exact scroll restoration
   useEffect(() => {
@@ -1826,6 +1844,14 @@ export default function App() {
     gsap.registerPlugin(ScrollTrigger);
 
     const restoreY = savedHeroScrollY.current;
+
+    const updateFooterVisibility = (isVisible) => {
+      const footerEl = document.querySelector('.hero-copyright-footer');
+      if (footerEl) {
+        if (isVisible) footerEl.classList.add('visible');
+        else footerEl.classList.remove('visible');
+      }
+    };
 
     // Helper to calculate 3D helical position from current scroll Y
     const sync3DHelicalPosition = (yPos) => {
@@ -1836,7 +1862,7 @@ export default function App() {
         scrollState.current.y = -18 + p * 40;
         scrollState.current.rotationOffset = -p * Math.PI * 2;
       }
-      setShowSocialFooter(p >= 0.80);
+      updateFooterVisibility(p >= 0.80);
     };
 
     let scrollTicking = false;
@@ -1846,7 +1872,7 @@ export default function App() {
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
           if (maxScroll > 0) {
             const p = window.scrollY / maxScroll;
-            setShowSocialFooter(p >= 0.80);
+            updateFooterVisibility(p >= 0.80);
           }
           scrollTicking = false;
         });
@@ -1874,7 +1900,7 @@ export default function App() {
         const p = self.progress;
         scrollState.current.y = -18 + p * 40;
         scrollState.current.rotationOffset = -p * Math.PI * 2;
-        setShowSocialFooter(p >= 0.80);
+        updateFooterVisibility(p >= 0.80);
       }
     });
 
@@ -2025,14 +2051,8 @@ export default function App() {
       >
         <Canvas 
           frameloop={currentPage === 'hero' ? 'always' : 'never'}
-          dpr={[1, 1.5]}
-          gl={{
-            powerPreference: 'high-performance',
-            antialias: true,
-            alpha: true,
-            stencil: false,
-            depth: true
-          }}
+          dpr={typeof window !== 'undefined' && window.innerWidth <= 768 ? 1 : [1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: true }}
           camera={{ position: [0, 0, 10.5], fov: 45, near: 0.1, far: 1000 }}
         >
           <ambientLight intensity={0.95} color="#e5ded4" />
