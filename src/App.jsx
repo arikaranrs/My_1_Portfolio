@@ -1687,6 +1687,14 @@ export default function App() {
 
   const [currentPage, setCurrentPage] = useState('hero');
 
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Saved scroll position for Hero page state restoration
   const savedHeroScrollY = useRef(0);
 
@@ -2151,17 +2159,58 @@ export default function App() {
       />
 
       {loadingState === 'active' && currentPage === 'hero' && (
-        <>
-          <div className="content">
-            <section style={{ height: '100vh' }}></section>
-            <section style={{ height: '100vh' }}></section>
-            <section style={{ height: '100vh' }}></section>
-            <section style={{ height: '100vh' }}></section>
-            <section style={{ height: '100vh' }}></section>
-            <section style={{ height: '100vh' }}></section>
+        isMobile ? (
+          /* MOBILE STATIC FALLBACK: Renders all 6 cards in a clean, static, high-performance DOM stack */
+          <div className="mobile-static-portfolio-wrapper">
+            <div className="card-3d hero-card">
+              <div className="badge">✦ IMMERSIVE 3D</div>
+              <h2>ABOUT</h2>
+              <p>Click below to warp into my full profile experience.</p>
+              <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("about"), e, true)}>
+                CLICK HERE
+              </button>
+            </div>
+
+            <div className="card-3d projects-card">
+              <div className="badge">🚀 FEATURED WORK</div>
+              <h2>PROJECTS</h2>
+              <p>Explore my AI, Machine Learning, Data Analytics, and Full Stack projects through an immersive cinematic experience.</p>
+              <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("projects"), e, true)}>
+                CLICK HERE
+              </button>
+            </div>
+
+            <div className="card-3d skills-card">
+              <div className="badge">✦ WARP TUNNEL</div>
+              <h2>SKILLS</h2>
+              <p>Explore my full Artificial Intelligence, Deep Learning, Machine Learning, and Data Analytics skillset.</p>
+              <button className="explore-skills-btn" onClick={(e) => playExplosion(() => setCurrentPage("skills"), e, true)}>
+                EXPLORE SKILLS
+              </button>
+            </div>
+
+            <Experience3DCarousel />
+
+            <KiraAssistantCard />
+
+            <ContactHeroCard />
+
+            <HeroCopyrightFooter isVisible={true} />
           </div>
-          <HeroCopyrightFooter isVisible={showSocialFooter} />
-        </>
+        ) : (
+          /* DESKTOP 3D HELICAL SCROLL ENGINE: 100% untouched original desktop experience */
+          <>
+            <div className="content">
+              <section style={{ height: '100vh' }}></section>
+              <section style={{ height: '100vh' }}></section>
+              <section style={{ height: '100vh' }}></section>
+              <section style={{ height: '100vh' }}></section>
+              <section style={{ height: '100vh' }}></section>
+              <section style={{ height: '100vh' }}></section>
+            </div>
+            <HeroCopyrightFooter isVisible={showSocialFooter} />
+          </>
+        )
       )}
     </>
   );

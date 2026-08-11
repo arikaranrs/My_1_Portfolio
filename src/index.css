@@ -5850,44 +5850,39 @@ body.loading-locked {
    preventing horizontal scroll, and scaling elements proportionally.
    ========================================================================= */
 
-/* Mobile Footer Social Row - Hidden on Desktop */
-.mobile-footer-social-row {
-  display: none;
+/* Mobile Static Cards Container System (Bypasses 3D Scroll Mounting Trap) */
+.mobile-static-portfolio-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 2.2rem !important;
+  width: 100% !important;
+  padding: 1.5rem 0.8rem 4rem !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
-/* =========================================================================
-   ELITE MOBILE FULL-PAGE SNAP SCROLL SYSTEM (@media max-width: 768px)
-   - TikTok / Reels Single-Touch-Swipe Vertical Snap Mechanics
-   - GPU Hardware Acceleration for 60fps Butter-Smooth Native Transitions
-   - 0 Modifications to WebGL Background Canvas or Internal Card Styles
-   ========================================================================= */
-
 @media (max-width: 768px) {
-  /* 1. Global Scroll Container: 100svh Vertical Snap Scroll */
-  html, 
-  body, 
-  #root, 
-  .content {
-    height: 100vh !important;
-    height: 100svh !important;
-    overflow-x: hidden !important;
-    overflow-y: scroll !important;
-    scroll-snap-type: y mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
-    scroll-behavior: smooth !important;
-    scrollbar-width: none !important;
-    touch-action: pan-y !important;
+  .mobile-static-portfolio-wrapper .card-3d,
+  .mobile-static-portfolio-wrapper .hero-card,
+  .mobile-static-portfolio-wrapper .projects-card,
+  .mobile-static-portfolio-wrapper .skills-card {
+    width: 90vw !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  /* Hide Scrollbars Completely */
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  #root::-webkit-scrollbar,
-  .content::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  /* 2. Promote Foreground DOM Cards to Dedicated Hardware GPU Layers & Center Snap */
+  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5897,10 +5892,7 @@ body.loading-locked {
   .experience-card,
   .apple-about-card,
   .project-slab-card,
-  .skill-glass-card,
-  .kira-assistant-card {
-    scroll-snap-align: center !important;
-    scroll-snap-stop: always !important;
+  .skill-glass-card {
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;
     backface-visibility: hidden !important;
