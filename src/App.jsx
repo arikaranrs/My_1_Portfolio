@@ -2023,8 +2023,10 @@ export default function App() {
         style={{ display: currentPage === 'hero' ? 'block' : 'none' }}
       >
         <Canvas 
+          dpr={[1, 1.5]}
           frameloop={currentPage === 'hero' ? 'always' : 'never'}
           camera={{ position: [0, 0, 10.5], fov: 45, near: 0.1, far: 1000 }}
+          gl={{ powerPreference: "high-performance", antialias: true, alpha: false }}
         >
           <ambientLight intensity={0.95} color="#e5ded4" />
           <pointLight position={[6, 12, 6]} intensity={1.8} color="#ffdca3" />

@@ -5864,8 +5864,20 @@ html, body, #root, .content {
   scroll-behavior: smooth !important;
 }
 
+/* Decouple WebGL Canvas Background from Touch Scroll Events */
+#canvas-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
 @media (max-width: 768px) {
   /* Promote 3D Canvas, WebGL Viewport & Cards to Dedicated Hardware GPU Layers */
+  #canvas-container,
   .canvas-container,
   .card-3d,
   .hero-card,
@@ -5884,15 +5896,33 @@ html, body, #root, .content {
     will-change: transform, opacity !important;
   }
 
-  /* Optimize Mobile GPU backdrop-filter Blur for 60fps Butter-Smooth Touch Scrolling */
+  /* 4. Lightweight Mobile Glassmorphism Blur (Frees Mobile GPU for 60fps WebGL background warp) */
   .card-3d,
   .experience-card.card-3d.exp-dice-face,
   .apple-about-card.liquid-crystal-card,
   .project-slab-card,
   .skill-glass-card,
   .kira-assistant-card {
-    backdrop-filter: blur(12px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    background: rgba(10, 15, 30, 0.84) !important;
+  }
+
+  /* 3. Perfect DOM Foreground Card Alignment & Overflow Containment */
+  .card-3d,
+  .hero-card,
+  .skills-card,
+  .projects-card,
+  .voice-card,
+  .contact-card,
+  .apple-about-card,
+  .project-slab-card,
+  .skill-glass-card {
+    margin: 0 auto !important;
+    width: 90% !important;
+    max-width: 360px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
 
   /* Hide the Contact Card inline social row on mobile */
