@@ -1488,10 +1488,13 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
       ? 9.4 
       : 6.2;
 
+  const isMobileMedia = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  const lerpFactor = isMobileMedia ? 0.12 : 0.08;
+
   useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
-      worldGroupRef.current.position.y += (scrollState.current.y - worldGroupRef.current.position.y) * 0.08;
-      worldGroupRef.current.rotation.y += (scrollState.current.rotationOffset - worldGroupRef.current.rotation.y) * 0.08;
+      worldGroupRef.current.position.y += (scrollState.current.y - worldGroupRef.current.position.y) * lerpFactor;
+      worldGroupRef.current.rotation.y += (scrollState.current.rotationOffset - worldGroupRef.current.rotation.y) * lerpFactor;
     }
   });
 
@@ -1835,11 +1838,13 @@ export default function App() {
       sync3DHelicalPosition(restoreY);
     }
 
+    const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+
     const trigger = ScrollTrigger.create({
       trigger: ".content",
       start: "top top",
       end: "bottom bottom",
-      scrub: 1.6,
+      scrub: isMobileViewport ? 0.6 : 1.6,
       onUpdate: (self) => {
         const p = self.progress;
         scrollState.current.y = -18 + p * 40;
