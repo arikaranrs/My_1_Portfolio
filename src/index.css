@@ -6032,6 +6032,7 @@ html, body, #root, .content {
 
   /* 5. Contact Hero Card 2-Column Responsive Layout */
   .contact-card-body {
+    display: flex !important;
     flex-direction: column !important;
     gap: 1.2rem !important;
   }
@@ -6043,10 +6044,44 @@ html, body, #root, .content {
     background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.5), transparent) !important;
   }
 
-  .contact-left-col,
-  .contact-right-col {
+  /* Explicitly restore visibility & flex layout for Get In Touch left info column */
+  .contact-left-col {
+    display: flex !important;
+    flex-direction: column !important;
     width: 100% !important;
     max-width: 100% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
+  }
+
+  .contact-right-col {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .contact-info-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.9rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+  }
+
+  .contact-info-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Only hide the inline social media icons row inside contact card on mobile */
+  .contact-card-social-row {
+    display: none !important;
   }
 
   .contact-3d-earth-container {
