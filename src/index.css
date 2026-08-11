@@ -3083,7 +3083,7 @@ body.loading-locked {
   100% { background-position: 0% 50%; }
 }
 
-/* Skills Section */
+/* Skills Section: High-Contrast Dark Indigo Navy (#0f172a) for 100% Readability on Light Frosted Glass */
 .exp-skills-block {
   margin-bottom: 0.4rem;
   display: flex;
@@ -3092,37 +3092,38 @@ body.loading-locked {
 }
 
 .exp-skills-label {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: linear-gradient(90deg, #00f2fe, #38bdf8, #a855f7, #ec4899);
-  background-size: 200% 200%;
-  animation: expTextLuminousShimmer 6s ease-in-out infinite alternate;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  background: linear-gradient(90deg, #0284c7 0%, #2563eb 50%, #7c3aed 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  margin-bottom: 0.1rem !important;
 }
 
 .exp-skills-list {
-  font-family: 'Space Grotesk', 'Outfit', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: #ffffff;
+  font-family: 'Space Grotesk', 'Outfit', sans-serif !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  line-height: 1.45 !important;
+  color: #0f172a !important;
+  text-shadow: none !important;
 }
 
 .exp-skill-text {
-  color: #ffffff;
-  font-weight: 600;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0px !important;
 }
 
 .exp-skill-bullet {
-  color: #00f2fe;
-  font-weight: 800;
-  padding: 0 0.18rem;
-  text-shadow: 0 0 8px rgba(0, 242, 254, 0.8);
+  color: #2563eb !important;
+  font-weight: 900 !important;
+  padding: 0 0.22rem !important;
+  text-shadow: none !important;
 }
 
 /* Footer Navigation Controls (STRICTLY CONTAINED INSIDE CARD & ZERO CLIPPING) */

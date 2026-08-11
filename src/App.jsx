@@ -380,9 +380,9 @@ function Experience3DCarousel() {
     if (startXRef.current === null) return;
     const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
     const diff = clientX - startXRef.current;
-    if (diff < -35) {
+    if (diff < -20) {
       setActiveIndex(1);
-    } else if (diff > 35) {
+    } else if (diff > 20) {
       setActiveIndex(0);
     }
     startXRef.current = null;
