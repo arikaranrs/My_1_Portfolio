@@ -5864,21 +5864,8 @@ html, body, #root, .content {
   scroll-behavior: smooth !important;
 }
 
-/* Decouple WebGL Canvas Background from Touch Scroll Events */
-#canvas-container {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
-}
-
 @media (max-width: 768px) {
-  /* Promote 3D Canvas, WebGL Viewport & Cards to Dedicated Hardware GPU Layers */
-  #canvas-container,
-  .canvas-container,
+  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5893,36 +5880,64 @@ html, body, #root, .content {
     -webkit-transform: translateZ(0) !important;
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
-    will-change: transform, opacity !important;
+    will-change: transform !important;
   }
 
-  /* 4. Lightweight Mobile Glassmorphism Blur (Frees Mobile GPU for 60fps WebGL background warp) */
-  .card-3d,
-  .experience-card.card-3d.exp-dice-face,
-  .apple-about-card.liquid-crystal-card,
-  .project-slab-card,
-  .skill-glass-card,
-  .kira-assistant-card {
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-    background: rgba(10, 15, 30, 0.84) !important;
+  /* Universal Text Overflow Prevention & Word Wrap for Mobile Foreground Cards */
+  h1, h2, h3, h4, h5, h6, p, span, a, label, input, textarea, button {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
   }
 
-  /* 3. Perfect DOM Foreground Card Alignment & Overflow Containment */
+  /* Fluid Typography Scaling for Mobile Card Headers & Body Text */
+  .card-3d h2,
+  .hero-card h2,
+  .skills-card h2,
+  .projects-card h2,
+  .voice-card h2,
+  .contact-card h2 {
+    font-size: clamp(1.4rem, 5vw, 1.85rem) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .card-3d p,
+  .hero-card p,
+  .skills-card p,
+  .projects-card p,
+  .voice-card p,
+  .contact-card p,
+  .exp-description-text {
+    font-size: clamp(0.72rem, 3.2vw, 0.85rem) !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Centered Mobile Card Layout & Strict Border Containment */
   .card-3d,
   .hero-card,
   .skills-card,
   .projects-card,
   .voice-card,
   .contact-card,
-  .apple-about-card,
-  .project-slab-card,
-  .skill-glass-card {
+  .kira-assistant-card {
+    width: 90vw !important;
+    max-width: 350px !important;
     margin: 0 auto !important;
-    width: 90% !important;
-    max-width: 360px !important;
-    overflow: hidden !important;
     box-sizing: border-box !important;
+    padding: 1.1rem 1rem !important;
+  }
+
+  /* Optimize Mobile Foreground backdrop-filter Blur for 60fps Butter-Smooth Touch Scrolling */
+  .card-3d,
+  .experience-card.card-3d.exp-dice-face,
+  .apple-about-card.liquid-crystal-card,
+  .project-slab-card,
+  .skill-glass-card,
+  .kira-assistant-card {
+    backdrop-filter: blur(8px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
   }
 
   /* Hide the Contact Card inline social row on mobile */
