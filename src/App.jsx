@@ -1679,6 +1679,15 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
   );
 }
 
+const PORTFOLIO_SECTIONS = [
+  { id: 'hero', badge: '✦ IMMERSIVE 3D', title: 'ABOUT', desc: 'Click below to warp into my full profile experience.', isHero: true },
+  { id: 'skills', badge: '🚀 FEATURED WORK', title: 'PROJECTS', desc: 'Explore my AI, Machine Learning, Data Analytics, and Full Stack projects through an immersive cinematic experience.', isProjects: true },
+  { id: 'projects', badge: '✦ WARP TUNNEL', title: 'SKILLS', desc: 'Explore my full Artificial Intelligence, Deep Learning, Machine Learning, and Data Analytics skillset.', isSkillsWarp: true },
+  { id: 'experience', badge: '⧫ CHRONOLOGY', title: 'EXPERIENCE', isExperienceCarousel: true },
+  { id: 'voice', badge: '◉ KIRA VOICE', title: 'Pulse Sphere', desc: 'An interactive pulse waveform showing off voice assistant integrations.' },
+  { id: 'contact', badge: '✧ CONNECT', title: 'Gravity Vortex', desc: 'Spin into our orbital path. Click to connect via GitHub, LinkedIn, or Email.', isContact: true }
+];
+
 // --- MAIN PORTFOLIO ROOT ---
 
 export default function App() {
@@ -2160,40 +2169,38 @@ export default function App() {
 
       {loadingState === 'active' && currentPage === 'hero' && (
         isMobile ? (
-          /* MOBILE STATIC FALLBACK: Renders all 6 cards in a clean, static, high-performance DOM stack */
+          /* SINGLE SOURCE OF TRUTH MOBILE CARDS (Portrait Clone Duplicate Dropped) */
           <div className="mobile-static-portfolio-wrapper" style={{ background: 'transparent', backgroundColor: 'transparent' }}>
-            <div className="card-3d hero-card">
-              <div className="badge">✦ IMMERSIVE 3D</div>
-              <h2>ABOUT</h2>
-              <p>Click below to warp into my full profile experience.</p>
-              <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("about"), e, true)}>
-                CLICK HERE
-              </button>
-            </div>
-
-            <div className="card-3d projects-card">
-              <div className="badge">🚀 FEATURED WORK</div>
-              <h2>PROJECTS</h2>
-              <p>Explore my AI, Machine Learning, Data Analytics, and Full Stack projects through an immersive cinematic experience.</p>
-              <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("projects"), e, true)}>
-                CLICK HERE
-              </button>
-            </div>
-
-            <div className="card-3d skills-card">
-              <div className="badge">✦ WARP TUNNEL</div>
-              <h2>SKILLS</h2>
-              <p>Explore my full Artificial Intelligence, Deep Learning, Machine Learning, and Data Analytics skillset.</p>
-              <button className="explore-skills-btn" onClick={(e) => playExplosion(() => setCurrentPage("skills"), e, true)}>
-                EXPLORE SKILLS
-              </button>
-            </div>
-
-            <Experience3DCarousel />
-
-            <KiraAssistantCard />
-
-            <ContactHeroCard />
+            {PORTFOLIO_SECTIONS.map((sec) => (
+              <React.Fragment key={sec.id}>
+                {sec.isExperienceCarousel ? (
+                  <Experience3DCarousel />
+                ) : sec.id === 'voice' ? (
+                  <KiraAssistantCard />
+                ) : sec.isContact ? (
+                  <ContactHeroCard />
+                ) : (
+                  <div className={`card-3d ${sec.id}-card`}>
+                    <div className="badge">{sec.badge}</div>
+                    <h2>{sec.title}</h2>
+                    <p>{sec.desc}</p>
+                    {sec.isProjects ? (
+                      <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("projects"), e, true)}>
+                        CLICK HERE
+                      </button>
+                    ) : sec.isSkillsWarp ? (
+                      <button className="hero-click-btn explore-skills-btn" onClick={(e) => playExplosion(() => setCurrentPage("skills"), e, true)}>
+                        EXPLORE SKILLS
+                      </button>
+                    ) : (
+                      <button className="hero-click-btn" onClick={(e) => playExplosion(() => setCurrentPage("about"), e, true)}>
+                        CLICK HERE
+                      </button>
+                    )}
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
 
             <HeroCopyrightFooter isVisible={true} />
           </div>
