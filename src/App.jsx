@@ -1505,11 +1505,13 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
 
   const distanceFactor = 6.2;
 
-  useFrame((state, delta) => {
+  const isMobileMedia = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  const lerpFactor = isMobileMedia ? 0.12 : 0.08;
+
+  useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
-      const lambda = isMobileMedia ? 12 : 9;
-      worldGroupRef.current.position.y = THREE.MathUtils.damp(worldGroupRef.current.position.y, scrollState.current.y, lambda, delta);
-      worldGroupRef.current.rotation.y = THREE.MathUtils.damp(worldGroupRef.current.rotation.y, scrollState.current.rotationOffset, lambda, delta);
+      worldGroupRef.current.position.y += (scrollState.current.y - worldGroupRef.current.position.y) * lerpFactor;
+      worldGroupRef.current.rotation.y += (scrollState.current.rotationOffset - worldGroupRef.current.rotation.y) * lerpFactor;
     }
   });
 
@@ -1822,7 +1824,6 @@ export default function App() {
     if (loadingState !== 'active' || currentPage !== 'hero') return;
 
     gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.config({ ignoreMobileResize: true });
 
     const restoreY = savedHeroScrollY.current;
 
@@ -1838,18 +1839,17 @@ export default function App() {
       setShowSocialFooter(p >= 0.80);
     };
 
-    let scrollTicking = false;
+    let rAFScheduled = false;
     const handleWindowScroll = () => {
-      if (!scrollTicking) {
-        window.requestAnimationFrame(() => {
+      if (!rAFScheduled) {
+        rAFScheduled = true;
+        requestAnimationFrame(() => {
+          rAFScheduled = false;
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          if (maxScroll > 0) {
-            const p = window.scrollY / maxScroll;
-            setShowSocialFooter(p >= 0.80);
-          }
-          scrollTicking = false;
+          if (maxScroll <= 0) return;
+          const p = window.scrollY / maxScroll;
+          setShowSocialFooter(p >= 0.80);
         });
-        scrollTicking = true;
       }
     };
 

@@ -5847,19 +5847,26 @@ body.loading-locked {
    COMPREHENSIVE MOBILE RESPONSIVENESS SYSTEM (320px – 768px)
    Strictly preserves desktop design while optimizing mobile layouts,
    preventing horizontal scroll, and scaling elements proportionally.
-/* Native Touch Momentum Smooth Scrolling */
-html, body, #root, .content, .scroll-container {
-  -webkit-overflow-scrolling: touch !important;
-  scroll-behavior: smooth !important;
-}
+   ========================================================================= */
 
 /* Mobile Footer Social Row - Hidden on Desktop */
 .mobile-footer-social-row {
   display: none;
 }
 
+/* =========================================================================
+   MOBILE WEB PERFORMANCE GPU HARDWARE ACCELERATION SYSTEM
+   ========================================================================= */
+
+/* Native Smooth Momentum Scrolling & Hardware Compositing Containers */
+html, body, #root, .content {
+  -webkit-overflow-scrolling: touch !important;
+  scroll-behavior: smooth !important;
+}
+
 @media (max-width: 768px) {
-  /* GPU Hardware Acceleration & Layer Promotion for Animated Elements */
+  /* Promote 3D Canvas, WebGL Viewport & Cards to Dedicated Hardware GPU Layers */
+  .canvas-container,
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5867,26 +5874,25 @@ html, body, #root, .content, .scroll-container {
   .voice-card,
   .contact-card,
   .experience-card,
-  .kira-assistant-card,
   .apple-about-card,
   .project-slab-card,
-  .skill-glass-card,
-  .hero-copyright-footer {
+  .skill-glass-card {
     transform: translateZ(0) !important;
-    will-change: transform, opacity !important;
-    -webkit-backface-visibility: hidden !important;
+    -webkit-transform: translateZ(0) !important;
     backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    will-change: transform, opacity !important;
   }
 
-  /* GPU Paint Optimization: Lightweight backdrop-filter blur for mobile GPUs */
+  /* Optimize Mobile GPU backdrop-filter Blur for 60fps Butter-Smooth Touch Scrolling */
   .card-3d,
   .experience-card.card-3d.exp-dice-face,
-  .kira-assistant-card,
   .apple-about-card.liquid-crystal-card,
   .project-slab-card,
-  .skill-glass-card {
-    backdrop-filter: blur(12px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  .skill-glass-card,
+  .kira-assistant-card {
+    backdrop-filter: blur(12px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
   }
 
   /* Hide the Contact Card inline social row on mobile */
