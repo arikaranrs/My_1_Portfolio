@@ -421,12 +421,13 @@ const server = http.createServer((req, res) => {
   res.end(JSON.stringify({ error: 'Endpoint not found' }));
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`
   =============================================================
-  🤖 KIRA AI ASSISTANT BACKEND SERVER RUNNING (OPTION B ENGINE)
+  🤖 KIRA AI ASSISTANT BACKEND SERVER RUNNING (NETWORK MODE)
   📡 Port: ${PORT}
-  🌐 URL: http://localhost:${PORT}
+  🌐 Local URL: http://localhost:${PORT}
+  📱 Network URL: http://192.168.1.17:${PORT}
   Audio Engine: Server-Side TTS/STT Synthesis Enabled
   Endpoints:
     - GET  /health

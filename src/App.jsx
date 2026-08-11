@@ -297,16 +297,9 @@ function CameraController({ loadingState }) {
       }
 
       const idleTime = time;
-      const targetZ = window.innerWidth <= 768 ? 12.5 : 10.5;
-
-      if (camera.fov !== 75) {
-        camera.fov = 75;
-        camera.updateProjectionMatrix();
-      }
-
       camera.position.x += (Math.sin(idleTime * 0.4) * 0.25 - camera.position.x) * 0.08;
       camera.position.y += (Math.cos(idleTime * 0.3) * 0.15 - camera.position.y) * 0.08;
-      camera.position.z += (targetZ - camera.position.z) * 0.08;
+      camera.position.z += (10.5 - camera.position.z) * 0.08;
       camera.lookAt(0, 0, 0);
     }
   });
@@ -523,7 +516,11 @@ const INITIAL_KIRA_WELCOME = [
   }
 ];
 
-const KIRA_API_BASE = import.meta.env.VITE_KIRA_API_URL || 'http://localhost:5000';
+const KIRA_API_BASE = import.meta.env.VITE_KIRA_API_URL || (
+  typeof window !== 'undefined' 
+    ? `http://${window.location.hostname}:5000` 
+    : 'http://localhost:5000'
+);
 
 function KiraAssistantCard() {
   const [isListening, setIsListening] = useState(false);
@@ -1473,14 +1470,23 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
   const linesRef = useRef();
 
   const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  const [viewportHeight, setViewportHeight] = useState(typeof window !== 'undefined' ? window.innerHeight : 800);
 
   useEffect(() => {
-    const handleResize = () => setViewportWidth(window.innerWidth);
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+      setViewportHeight(window.innerHeight);
+    };
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const distanceFactor = 6.2;
+  const aspect = viewportHeight > 0 ? viewportWidth / viewportHeight : 1.5;
+  const distanceFactor = aspect < 0.65 || viewportWidth <= 420 
+    ? 11.6 
+    : aspect < 0.85 || viewportWidth <= 768 
+      ? 9.4 
+      : 6.2;
 
   useFrame(() => {
     if (worldGroupRef.current && loadingState === 'active') {
@@ -1833,7 +1839,7 @@ export default function App() {
       trigger: ".content",
       start: "top top",
       end: "bottom bottom",
-      scrub: window.innerWidth <= 768 ? 0.3 : 1.6,
+      scrub: 1.6,
       onUpdate: (self) => {
         const p = self.progress;
         scrollState.current.y = -18 + p * 40;
