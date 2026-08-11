@@ -5849,14 +5849,49 @@ body.loading-locked {
    preventing horizontal scroll, and scaling elements proportionally.
    ========================================================================= */
 
-/* Global Viewport Containment for Mobile */
-html, body, #root {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  box-sizing: border-box !important;
+/* Mobile Footer Social Row - Hidden on Desktop */
+.mobile-footer-social-row {
+  display: none;
 }
 
 @media (max-width: 768px) {
+  /* Hide the Contact Card inline social row on mobile */
+  .contact-card-social-row {
+    display: none !important;
+  }
+
+  /* Show and horizontally center social media icons above copyright text on mobile */
+  .mobile-footer-social-row {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.85rem !important;
+    margin-bottom: 0.6rem !important;
+    width: 100% !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-footer-social-row .contact-social-mini-btn {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(0, 242, 254, 0.4) !important;
+    color: #e2e8f0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+  }
+
+  .mobile-footer-social-row .contact-social-mini-btn:hover,
+  .mobile-footer-social-row .contact-social-mini-btn:active {
+    transform: translateY(-2px) scale(1.1) !important;
+    border-color: #00f2fe !important;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.6) !important;
+  }
+
   /* 1. Universal Layout Containment */
   * {
     max-width: 100% !important;
