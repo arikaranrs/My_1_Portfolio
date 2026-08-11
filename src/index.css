@@ -5847,7 +5847,11 @@ body.loading-locked {
    COMPREHENSIVE MOBILE RESPONSIVENESS SYSTEM (320px – 768px)
    Strictly preserves desktop design while optimizing mobile layouts,
    preventing horizontal scroll, and scaling elements proportionally.
-   ========================================================================= */
+/* Native Touch Momentum Smooth Scrolling */
+html, body, #root, .content, .scroll-container {
+  -webkit-overflow-scrolling: touch !important;
+  scroll-behavior: smooth !important;
+}
 
 /* Mobile Footer Social Row - Hidden on Desktop */
 .mobile-footer-social-row {
@@ -5855,6 +5859,36 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
+  /* GPU Hardware Acceleration & Layer Promotion for Animated Elements */
+  .card-3d,
+  .hero-card,
+  .skills-card,
+  .projects-card,
+  .voice-card,
+  .contact-card,
+  .experience-card,
+  .kira-assistant-card,
+  .apple-about-card,
+  .project-slab-card,
+  .skill-glass-card,
+  .hero-copyright-footer {
+    transform: translateZ(0) !important;
+    will-change: transform, opacity !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+  }
+
+  /* GPU Paint Optimization: Lightweight backdrop-filter blur for mobile GPUs */
+  .card-3d,
+  .experience-card.card-3d.exp-dice-face,
+  .kira-assistant-card,
+  .apple-about-card.liquid-crystal-card,
+  .project-slab-card,
+  .skill-glass-card {
+    backdrop-filter: blur(12px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  }
+
   /* Hide the Contact Card inline social row on mobile */
   .contact-card-social-row {
     display: none !important;

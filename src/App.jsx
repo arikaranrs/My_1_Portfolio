@@ -1839,11 +1839,19 @@ export default function App() {
       setShowSocialFooter(p >= 0.80);
     };
 
+    let scrollTicking = false;
     const handleWindowScroll = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll <= 0) return;
-      const p = window.scrollY / maxScroll;
-      setShowSocialFooter(p >= 0.80);
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          if (maxScroll > 0) {
+            const p = window.scrollY / maxScroll;
+            setShowSocialFooter(p >= 0.80);
+          }
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
     };
 
     window.addEventListener('scroll', handleWindowScroll, { passive: true });
