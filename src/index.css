@@ -5856,17 +5856,38 @@ body.loading-locked {
 }
 
 /* =========================================================================
-   MOBILE WEB PERFORMANCE GPU HARDWARE ACCELERATION SYSTEM
+   ELITE MOBILE FULL-PAGE SNAP SCROLL SYSTEM (@media max-width: 768px)
+   - TikTok / Reels Single-Touch-Swipe Vertical Snap Mechanics
+   - GPU Hardware Acceleration for 60fps Butter-Smooth Native Transitions
+   - 0 Modifications to WebGL Background Canvas or Internal Card Styles
    ========================================================================= */
 
-/* Native Smooth Momentum Scrolling & Hardware Compositing Containers */
-html, body, #root, .content {
-  -webkit-overflow-scrolling: touch !important;
-  scroll-behavior: smooth !important;
-}
-
 @media (max-width: 768px) {
-  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
+  /* 1. Global Scroll Container: 100svh Vertical Snap Scroll */
+  html, 
+  body, 
+  #root, 
+  .content {
+    height: 100vh !important;
+    height: 100svh !important;
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    scroll-snap-type: y mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important;
+    touch-action: pan-y !important;
+  }
+
+  /* Hide Scrollbars Completely */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  #root::-webkit-scrollbar,
+  .content::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* 2. Promote Foreground DOM Cards to Dedicated Hardware GPU Layers & Center Snap */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5876,7 +5897,10 @@ html, body, #root, .content {
   .experience-card,
   .apple-about-card,
   .project-slab-card,
-  .skill-glass-card {
+  .skill-glass-card,
+  .kira-assistant-card {
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;
     backface-visibility: hidden !important;
