@@ -5884,6 +5884,48 @@ html, body, #root, .content {
     will-change: transform !important;
   }
 
+  /* =========================================================================
+     ISOLATED NATIVE MOBILE HORIZONTAL SWIPE & SCROLL SNAPPING
+     Target: Experience Carousel Section ONLY (.exp-dice-container / .exp-dice-face)
+     ========================================================================= */
+  .exp-hero-carousel-container.exp-dice-container {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    padding-bottom: 0.8rem !important;
+    scrollbar-width: none !important;
+    touch-action: pan-x pan-y !important;
+  }
+
+  .exp-hero-carousel-container.exp-dice-container::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .exp-cards-track.exp-dice-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 1rem !important;
+    width: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .experience-card.card-3d.exp-dice-face {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    max-width: 340px !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
   /* Universal Text Overflow Prevention & Word Wrap for Mobile Foreground Cards */
   h1, h2, h3, h4, h5, h6, p, span, a, label, input, textarea, button {
     overflow-wrap: break-word !important;
