@@ -490,9 +490,12 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
                 '--card-color': card.color
               }}
             >
-              {/* Specular Shimmer Sweep & Neon Border */}
-              <div className="exp-card-specular-shine"></div>
-              <div className="exp-card-neon-border"></div>
+              {/* Page Number Badge & Header */}
+              <div className="exp-page-header-row">
+                <span className="exp-page-badge">
+                  {i === 0 ? 'PAGE 1 / 2 • VCODEZ' : 'PAGE 2 / 2 • DIGITALYTIC'}
+                </span>
+              </div>
 
               <h2 className="exp-role-title">
                 <span className="exp-company-part">{card.company}</span>
@@ -516,7 +519,7 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
                 </div>
               </div>
 
-              {/* Tap to switch hint for active card & Click Here Warp Button */}
+              {/* Enhanced Footer Controls: Click Here Warp + Arrow Nav + Dots */}
               <div className="exp-card-footer-controls">
                 <button
                   className="hero-click-btn exp-click-btn"
@@ -530,21 +533,43 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
                   Click Here
                 </button>
 
-                <div className="exp-dots-indicator">
-                  <span 
-                    className={`exp-dot ${activeIndex === 0 ? 'active' : ''}`}
-                    onClick={(e) => { e.stopPropagation(); setActiveIndex(0); }}
-                  />
-                  <span 
-                    className={`exp-dot ${activeIndex === 1 ? 'active' : ''}`}
-                    onClick={(e) => { e.stopPropagation(); setActiveIndex(1); }}
-                  />
-                </div>
+                {/* 2-Page Arrow & Dot Switcher */}
+                <div className="exp-nav-switch-group">
+                  <button 
+                    className="exp-arrow-btn"
+                    title="Previous Page"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveIndex(0);
+                    }}
+                  >
+                    ‹
+                  </button>
 
-                <span className="exp-tap-hint" onClick={toggleCard}>
-                  <span className="exp-hint-text">{isCurrent ? 'Roll Dice' : 'Tap'}</span>
-                  <span className="exp-hint-icon">🎲</span>
-                </span>
+                  <div className="exp-dots-indicator">
+                    <span 
+                      className={`exp-dot ${activeIndex === 0 ? 'active' : ''}`}
+                      title="Page 1: VCodez"
+                      onClick={(e) => { e.stopPropagation(); setActiveIndex(0); }}
+                    />
+                    <span 
+                      className={`exp-dot ${activeIndex === 1 ? 'active' : ''}`}
+                      title="Page 2: Digitalytic"
+                      onClick={(e) => { e.stopPropagation(); setActiveIndex(1); }}
+                    />
+                  </div>
+
+                  <button 
+                    className="exp-arrow-btn"
+                    title="Next Page"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveIndex(1);
+                    }}
+                  >
+                    ›
+                  </button>
+                </div>
               </div>
 
             </div>

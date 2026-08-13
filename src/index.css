@@ -3147,6 +3147,56 @@ body.loading-locked {
   box-shadow: 0 6px 20px rgba(0, 242, 254, 0.6) !important;
 }
 
+.exp-page-header-row {
+  display: flex !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.exp-page-badge {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.6rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #0284c7 !important;
+  background: rgba(224, 242, 254, 0.85) !important;
+  border: 1px solid rgba(56, 189, 248, 0.5) !important;
+  padding: 0.18rem 0.6rem !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 6px rgba(0, 242, 254, 0.15) !important;
+}
+
+.exp-nav-switch-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.exp-arrow-btn {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(0, 242, 254, 0.6) !important;
+  color: #00f2fe !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.9rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 242, 254, 0.25) !important;
+}
+
+.exp-arrow-btn:hover {
+  background: #00f2fe !important;
+  color: #0f172a !important;
+  transform: scale(1.1) !important;
+}
+
 /* Footer Navigation Controls (STRICTLY CONTAINED INSIDE CARD & ZERO CLIPPING) */
 .exp-card-footer-controls {
   display: flex !important;
@@ -5980,12 +6030,25 @@ body.loading-locked {
     max-height: 270px !important;
     margin: 0 !important;
     box-sizing: border-box !important;
-    pointer-events: auto !important;
-    opacity: 1 !important;
-    visibility: visible !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+  }
+
+  .experience-card.card-3d.exp-dice-face.exp-face-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    filter: blur(0px) brightness(1.08) !important;
+  }
+
+  .experience-card.card-3d.exp-dice-face.exp-face-inactive {
+    opacity: 0.25 !important;
+    visibility: visible !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+    filter: blur(2px) brightness(0.7) !important;
   }
 
   /* Universal Text Overflow Prevention & Word Wrap for Mobile Foreground Cards */
