@@ -1378,6 +1378,13 @@ function ContactHeroCard() {
               <span>Your message is secure and private</span>
             </div>
 
+            {/* Embedded Bottom Center Luminous Copyright Badge */}
+            <div className="contact-embedded-copyright-wrapper">
+              <span className="copyright-colorful-text">
+                © 2026 ARIKARAN R. ALL RIGHTS RESERVED.
+              </span>
+            </div>
+
           </form>
         </div>
       </div>

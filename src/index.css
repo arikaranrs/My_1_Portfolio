@@ -6082,12 +6082,43 @@ body.loading-locked {
     align-items: center !important;
     text-align: center !important;
     width: 100% !important;
+    margin-top: 0.4rem !important;
   }
 
   .copyright-colorful-text {
-    font-size: clamp(0.6rem, 2.8vw, 0.78rem) !important;
-    letter-spacing: 0.08em !important;
+    font-family: 'Space Grotesk', 'Orbitron', 'Outfit', system-ui, sans-serif !important;
+    font-size: clamp(0.68rem, 2.5vw, 0.88rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
     text-align: center !important;
+    color: #0284c7 !important;
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 25%, #7c3aed 50%, #c026d3 75%, #db2777 100%, #00f2fe 100%) !important;
+    background-size: 300% 300% !important;
+    animation: copyrightNeonShimmer 5s ease-in-out infinite alternate !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.45)) !important;
+    padding: 0.2rem 0.6rem !important;
+    display: inline-block !important;
+  }
+
+  @keyframes copyrightNeonShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Contact Card Embedded Bottom Copyright Badge */
+  .contact-embedded-copyright-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 0.85rem !important;
+    padding-top: 0.65rem !important;
+    border-top: 1px dashed rgba(0, 242, 254, 0.25) !important;
   }
 
   /* 1. Universal Layout Containment */
