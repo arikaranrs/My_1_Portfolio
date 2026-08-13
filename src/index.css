@@ -5850,103 +5850,21 @@ body.loading-locked {
    preventing horizontal scroll, and scaling elements proportionally.
    ========================================================================= */
 
-/* Desktop Footer Social Row Override: Hide duplicate social icons on desktop view (> 768px) */
-.mobile-footer-social-row {
-  display: none !important;
-}
-
-@media (min-width: 769px) {
-  .mobile-footer-social-row {
-    display: none !important;
-  }
-}
-
-/* Lock WebGL Background Canvas to Fixed Layer with Pointer-Events Enabled for Drei HTML Cards */
+/* Lock WebGL Cinematic Background Canvas to Fixed Layer Behind DOM */
 #canvas-container {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 1 !important;
+  z-index: -1 !important;
   pointer-events: none !important;
   background: transparent !important;
   background-color: transparent !important;
 }
 
-/* Ensure Three.js Drei HTML Portal containers & all buttons are 100% clickable */
-#canvas-container > div,
-.card-3d,
-.hero-click-btn,
-.explore-skills-btn,
-.contact-submit-btn-ref,
-.contact-social-mini-btn,
-.social-icon-btn,
-.contact-input,
-.contact-textarea,
-.kira-send-btn,
-.kira-mic-btn {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-
-/* Allow mouse clicks & touch taps to pass through scroll document to 3D card buttons */
-.content {
-  pointer-events: none !important;
-}
-
-/* =========================================================================
-   144 FPS ULTRA-SMOOTH MOBILE 6-CARD 3D SCROLL & TRANSPARENCY SYSTEM
-   Target: Mobile Viewports ONLY (@media max-width: 768px)
-   ========================================================================= */
-
 @media (max-width: 768px) {
-  /* 1. Mobile Document Root: Native Touch Pan-Y Scrolling across full 600vh range */
-  html, 
-  body, 
-  #root {
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    touch-action: pan-y !important;
-    scroll-behavior: smooth !important;
-    scrollbar-width: none !important;
-    background: transparent !important;
-    background-color: transparent !important;
-  }
-
-  /* 2. Scroll Document Overlay: Captures touch swipe gestures to advance GSAP 3D camera across all 6 cards */
-  .content {
-    height: 600vh !important;
-    height: 600svh !important;
-    width: 100% !important;
-    pointer-events: auto !important;
-    touch-action: pan-y !important;
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  .content section {
-    height: 100vh !important;
-    height: 100svh !important;
-    width: 100% !important;
-    pointer-events: auto !important;
-    touch-action: pan-y !important;
-  }
-
-  /* 3. Hide Mobile Scrollbars for Clean App-Like Interface */
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  #root::-webkit-scrollbar,
-  .content::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  /* 4. Force ALL 6 Cards (About, Projects, Skills, Experience, KIRA AI, Contact) Visible & Accessible */
+  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5954,152 +5872,32 @@ body.loading-locked {
   .voice-card,
   .contact-card,
   .experience-card,
-  .kira-assistant-card,
-  .apple-about-card {
+  .apple-about-card,
+  .project-slab-card,
+  .skill-glass-card {
+    position: relative !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    margin: 0 auto !important;
     opacity: 1 !important;
     visibility: visible !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    width: clamp(280px, 88vw, 360px) !important;
+    z-index: 10 !important;
+    width: clamp(280px, 88vw, 420px) !important;
     max-width: 92vw !important;
     height: auto !important;
-    margin: 0 auto !important;
-    padding: clamp(0.9rem, 3.5vw, 1.35rem) !important;
-    box-sizing: border-box !important;
-    position: relative !important;
-    pointer-events: auto !important;
-    cursor: pointer !important;
-    
-    /* Luxury Dark Glassmorphism */
-    background: rgba(15, 23, 42, 0.68) !important;
-    backdrop-filter: blur(10px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 242, 254, 0.15) !important;
-
-    /* 144 FPS Hardware GPU Compositing Layers */
-    transform: translate3d(0, 0, 0) !important;
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    will-change: transform !important;
-  }
-}
-
-  /* 5. KIRA Voice AI Assistant Card Mobile Alignment & Overlap Fix */
-  .kira-assistant-card {
-    width: clamp(280px, 88vw, 360px) !important;
-    max-width: 92vw !important;
-    height: auto !important;
-    margin: 0 auto 1.5rem auto !important;
-    padding: clamp(0.9rem, 3.5vw, 1.25rem) !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-
-  .kira-card-header {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 0.4rem !important;
-    width: 100% !important;
-  }
-
-  .kira-lang-select {
-    width: 100% !important;
-    max-width: 220px !important;
-    font-size: 0.72rem !important;
-    padding: 0.35rem 0.6rem !important;
-    margin-top: 0.2rem !important;
-  }
-
-  .kira-orb-container {
-    width: 85px !important;
-    height: 85px !important;
-    margin: 0.3rem auto !important;
-  }
-
-  .kira-chat-history {
-    width: 100% !important;
-    max-height: 180px !important;
-    min-height: 100px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 0.6rem !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-    margin: 0.2rem 0 !important;
-  }
-
-  .kira-chat-msg {
-    max-width: 88% !important;
-    font-size: 0.75rem !important;
-    line-height: 1.4 !important;
-    padding: 0.45rem 0.75rem !important;
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
-  }
-
-  .kira-input-row {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 0.4rem !important;
-    width: 100% !important;
+    padding: clamp(0.9rem, 3.5vw, 1.4rem) !important;
     box-sizing: border-box !important;
   }
 
-  .kira-text-input {
-    flex: 1 1 auto !important;
-    width: 0 !important;
-    min-width: 0 !important;
-    font-size: 0.76rem !important;
-    padding: 0.5rem 0.75rem !important;
-    box-sizing: border-box !important;
-  }
-
-  .kira-mic-btn,
-  .kira-send-btn {
-    flex-shrink: 0 !important;
-    width: 36px !important;
-    height: 36px !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  .kira-privacy-note {
-    font-size: 0.62rem !important;
-    margin-top: 0.2rem !important;
-    text-align: center !important;
-  }
-
-  /* 4. Fluid Typography Alignment inside Cards */
+  /* 3. Fluid Typography Scaling for Mobile Screens */
   .card-3d h2 {
-    font-size: clamp(1.3rem, 5vw, 1.7rem) !important;
+    font-size: clamp(1.25rem, 4.5vw, 1.75rem) !important;
     line-height: 1.25 !important;
-    margin-bottom: 0.5rem !important;
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
   }
 
   .card-3d p {
-    font-size: clamp(0.74rem, 3.2vw, 0.84rem) !important;
+    font-size: clamp(0.72rem, 3vw, 0.85rem) !important;
     line-height: 1.45 !important;
-    margin-bottom: 0.8rem !important;
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
   }
 
   /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
@@ -6265,11 +6063,19 @@ body.loading-locked {
     box-shadow: 0 0 15px rgba(0, 242, 254, 0.6) !important;
   }
 
-  /* Completely drop copyright text elements as requested */
-  .copyright-reflection-wrapper,
-  .copyright-colorful-text,
-  .contact-embedded-copyright-wrapper {
-    display: none !important;
+  /* 3. Copyright Reflection Wrapper: Row 2 - Centered directly below icons */
+  .copyright-reflection-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .copyright-colorful-text {
+    font-size: clamp(0.6rem, 2.8vw, 0.78rem) !important;
+    letter-spacing: 0.08em !important;
+    text-align: center !important;
   }
 
   /* 1. Universal Layout Containment */
