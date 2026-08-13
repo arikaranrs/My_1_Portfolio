@@ -449,10 +449,8 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
     }
   };
 
-  // Base rotation angle (-90deg per index) plus interactive drag rotation
-  const baseAngle = activeIndex * -90;
-  const dragAngle = isDragging ? (dragOffset / 350) * 90 : 0;
-  const currentRotation = baseAngle + dragAngle;
+  // Calculate card 3D rotation based on activeIndex and drag offset
+  const dragDeg = isDragging ? (dragOffset / 350) * 90 : 0;
 
   return (
     <div 
@@ -467,16 +465,10 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
       onTouchCancel={handleTouchEnd}
       onWheel={handleWheel}
     >
-      <div 
-        className="exp-cards-track exp-dice-track"
-        style={{
-          transform: `translateZ(-200px) rotateY(${currentRotation}deg)`,
-          transition: isDragging ? 'none' : 'transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.05)'
-        }}
-      >
+      <div className="exp-cards-track exp-dice-track">
         {EXPERIENCE_CARDS.map((card, i) => {
           const isCurrent = i === activeIndex;
-          const relativeAngle = (i - activeIndex) * 90 + (isDragging ? (dragOffset / 350) * 90 : 0);
+          const relativeAngle = (i - activeIndex) * 90 + dragDeg;
 
           return (
             <div
@@ -489,11 +481,12 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
               style={{
                 '--card-glow': card.glow,
                 '--card-color': card.color,
-                transform: `rotateY(${relativeAngle}deg) translateZ(160px)`,
-                opacity: isCurrent ? 1 : 0.2,
+                transform: `rotateY(${relativeAngle}deg) translateZ(${isCurrent ? 0 : 140}px)`,
+                opacity: isCurrent ? 1 : 0,
                 zIndex: isCurrent ? 10 : 1,
-                pointerEvents: isCurrent ? 'auto' : 'cursor',
-                transition: isDragging ? 'none' : 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease'
+                pointerEvents: isCurrent ? 'auto' : 'none',
+                visibility: isCurrent ? 'visible' : 'hidden',
+                transition: isDragging ? 'none' : 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease'
               }}
             >
               {/* Page Number Badge & Header */}

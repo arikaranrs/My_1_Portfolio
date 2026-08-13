@@ -6044,11 +6044,7 @@ body.loading-locked {
   }
 
   .experience-card.card-3d.exp-dice-face.exp-face-inactive {
-    opacity: 0.25 !important;
-    visibility: visible !important;
-    z-index: 2 !important;
-    pointer-events: auto !important;
-    filter: blur(2px) brightness(0.7) !important;
+    filter: blur(1.5px) brightness(0.8) !important;
   }
 
   /* Universal Text Overflow Prevention & Word Wrap for Mobile Foreground Cards */
