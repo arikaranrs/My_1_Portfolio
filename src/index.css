@@ -5861,17 +5861,38 @@ body.loading-locked {
   }
 }
 
-/* Lock WebGL Cinematic Background Canvas to Fixed Layer Behind DOM */
+/* Lock WebGL Background Canvas to Fixed Layer with Pointer-Events Enabled for Drei HTML Cards */
 #canvas-container {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: -1 !important;
+  z-index: 1 !important;
   pointer-events: none !important;
   background: transparent !important;
   background-color: transparent !important;
+}
+
+/* Ensure Three.js Drei HTML Portal containers & all buttons are 100% clickable */
+#canvas-container > div,
+.card-3d,
+.hero-click-btn,
+.explore-skills-btn,
+.contact-submit-btn-ref,
+.contact-social-mini-btn,
+.social-icon-btn,
+.contact-input,
+.contact-textarea,
+.kira-send-btn,
+.kira-mic-btn {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Allow mouse clicks & touch taps to pass through scroll document to 3D card buttons */
+.content {
+  pointer-events: none !important;
 }
 
 @media (max-width: 768px) {
