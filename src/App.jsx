@@ -476,6 +476,7 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
       >
         {EXPERIENCE_CARDS.map((card, i) => {
           const isCurrent = i === activeIndex;
+          const relativeAngle = (i - activeIndex) * 90 + (isDragging ? (dragOffset / 350) * 90 : 0);
 
           return (
             <div
@@ -483,11 +484,16 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
               className={`experience-card card-3d exp-dice-face exp-face-${i} ${isCurrent ? 'exp-face-active' : 'exp-face-inactive'}`}
               onClick={(e) => {
                 e.stopPropagation();
-                if (!isCurrent) toggleCard();
+                if (!isCurrent) toggleCard(e);
               }}
               style={{
                 '--card-glow': card.glow,
-                '--card-color': card.color
+                '--card-color': card.color,
+                transform: `rotateY(${relativeAngle}deg) translateZ(160px)`,
+                opacity: isCurrent ? 1 : 0.2,
+                zIndex: isCurrent ? 10 : 1,
+                pointerEvents: isCurrent ? 'auto' : 'cursor',
+                transition: isDragging ? 'none' : 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease'
               }}
             >
               {/* Page Number Badge & Header */}
