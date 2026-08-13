@@ -355,6 +355,7 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const startXRef = useRef(null);
+  const startYRef = useRef(null);
   const lastWheelTimeRef = useRef(0);
 
   const toggleCard = (e) => {
@@ -363,29 +364,73 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
   };
 
   const handlePointerDown = (e) => {
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    startXRef.current = clientX;
+    // Ignore synthesized mouse/pointer events if touch is active
+    if (e.pointerType === 'touch') return;
+    startXRef.current = e.clientX;
     setIsDragging(true);
     setDragOffset(0);
   };
 
   const handlePointerMove = (e) => {
+    if (e.pointerType === 'touch') return;
     if (startXRef.current === null) return;
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    const diff = clientX - startXRef.current;
+    const diff = e.clientX - startXRef.current;
     setDragOffset(diff);
   };
 
   const handlePointerUp = (e) => {
+    if (e.pointerType === 'touch') return;
     if (startXRef.current === null) return;
-    const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
-    const diff = clientX - startXRef.current;
+    const diff = e.clientX - startXRef.current;
     if (diff < -20) {
       setActiveIndex(1);
     } else if (diff > 20) {
       setActiveIndex(0);
     }
     startXRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  // Dedicated Mobile Touch Swipe Handlers
+  const handleTouchStart = (e) => {
+    if (!e.touches || e.touches.length === 0) return;
+    startXRef.current = e.touches[0].clientX;
+    startYRef.current = e.touches[0].clientY;
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleTouchMove = (e) => {
+    if (startXRef.current === null || !e.touches || e.touches.length === 0) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - startXRef.current;
+    const diffY = currentY - startYRef.current;
+
+    // Capture horizontal swipe when diffX dominates diffY
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      setDragOffset(diffX);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (startXRef.current === null) return;
+    let clientX = startXRef.current + dragOffset;
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      clientX = e.changedTouches[0].clientX;
+    }
+    const diff = clientX - startXRef.current;
+
+    // Left Swipe (< -20px) -> Digitalytic (Card 1) | Right Swipe (> 20px) -> VCodez (Card 0)
+    if (diff < -20) {
+      setActiveIndex(1);
+    } else if (diff > 20) {
+      setActiveIndex(0);
+    }
+
+    startXRef.current = null;
+    startYRef.current = null;
     setIsDragging(false);
     setDragOffset(0);
   };
@@ -406,7 +451,7 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
 
   // Base rotation angle (-90deg per index) plus interactive drag rotation
   const baseAngle = activeIndex * -90;
-  const dragAngle = isDragging ? (dragOffset / 400) * 90 : 0;
+  const dragAngle = isDragging ? (dragOffset / 350) * 90 : 0;
   const currentRotation = baseAngle + dragAngle;
 
   return (
@@ -416,9 +461,10 @@ function Experience3DCarousel({ onExperienceWarpTrigger }) {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      onTouchStart={handlePointerDown}
-      onTouchMove={handlePointerMove}
-      onTouchEnd={handlePointerUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       onWheel={handleWheel}
     >
       <div 
