@@ -5896,28 +5896,32 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
-  /* 1. Mobile Root Containers: TikTok/Reels Style Vertical Snap Scroll */
+  /* 1. Mobile Root Containers: Full Touch Scroll Height for 3D Camera Navigation across all 6 Cards */
   html, 
   body, 
-  #root, 
-  .content {
-    height: 100vh !important;
-    height: 100svh !important;
+  #root {
+    height: auto !important;
+    min-height: 100vh !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
-    scroll-snap-type: y mandatory !important;
     -webkit-overflow-scrolling: touch !important;
     scroll-behavior: smooth !important;
-    scrollbar-width: none !important;
     background: transparent !important;
     background-color: transparent !important;
   }
 
-  /* 2. Hide Mobile Scrollbars for Clean App-Like Interface */
+  /* Full 600vh scroll range allowing touch scroll to navigate through all 6 cards */
+  .content {
+    height: 600vh !important;
+    position: relative !important;
+    pointer-events: none !important;
+    display: block !important;
+  }
+
+  /* 2. Hide Mobile Scrollbars for Clean Interface */
   html::-webkit-scrollbar,
   body::-webkit-scrollbar,
-  #root::-webkit-scrollbar,
-  .content::-webkit-scrollbar {
+  #root::-webkit-scrollbar {
     display: none !important;
   }
 
@@ -5937,7 +5941,7 @@ body.loading-locked {
     box-sizing: border-box !important;
   }
 
-  /* 4. Full Screen Snap Target per Card & 60fps GPU Layering */
+  /* 4. Force 100% Visibility, GPU Compositing & Clean Spacing for All 6 Cards */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5947,12 +5951,13 @@ body.loading-locked {
   .experience-card,
   .kira-assistant-card,
   .apple-about-card {
-    scroll-snap-align: center !important;
-    scroll-snap-stop: always !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
     width: clamp(280px, 88vw, 360px) !important;
     max-width: 92vw !important;
     min-height: auto !important;
-    margin: 0 auto !important;
+    margin: 0 auto 1.5rem auto !important;
     padding: clamp(1rem, 4vw, 1.4rem) !important;
     box-sizing: border-box !important;
     position: relative !important;
