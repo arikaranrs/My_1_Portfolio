@@ -5851,59 +5851,79 @@ body.loading-locked {
    ========================================================================= */
 
 /* =========================================================================
-   UNIFIED KIRA AI DARK GLASS THEME FOR ABOUT, SKILLS & PROJECTS CARDS
-   Matches the exact dark luxury glassmorphism, cyan border glow, & neon highlights
+   WARM WHITE & LIGHT GOLD REFLECTING GLASS CARD SYSTEM
+   Perfectly harmonizes cards with the warm white & light gold WebGL 3D Canvas
    ========================================================================= */
-.card-3d,
+
 .hero-card,
 .apple-about-card,
 .skills-card,
 .projects-card,
 .voice-card,
 .contact-card,
+.experience-card {
+  background: rgba(253, 251, 247, 0.94) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  border: 1px solid rgba(200, 157, 108, 0.4) !important;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18), 0 0 25px rgba(212, 175, 55, 0.22) !important;
+  color: #0f172a !important;
+  border-radius: 24px !important;
+}
+
+/* Headings inside Warm White Gold Cards: Dark Indigo Navy */
+.hero-card h2,
+.apple-about-card h2,
+.skills-card h2,
+.projects-card h2,
+.contact-card h2 {
+  color: #0f172a !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+/* Body Text: High-Contrast Dark Slate */
+.hero-card p,
+.apple-about-card p,
+.skills-card p,
+.projects-card p,
+.contact-card p {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+/* Badges: Light Gold Accent */
+.hero-card .badge,
+.apple-about-card .badge,
+.skills-card .badge,
+.projects-card .badge {
+  background: rgba(200, 157, 108, 0.18) !important;
+  color: #9a6b32 !important;
+  border: 1px solid rgba(200, 157, 108, 0.45) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25) !important;
+  font-weight: 800 !important;
+}
+
+/* Click Buttons: Warm Gold Gradient */
+.hero-card .hero-click-btn,
+.apple-about-card .hero-click-btn,
+.projects-card .hero-click-btn,
+.skills-card .explore-skills-btn {
+  background: linear-gradient(135deg, #c89d6c 0%, #3b82f6 50%, #0f172a 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 8px 25px rgba(200, 157, 108, 0.4) !important;
+}
+
+/* KIRA AI Voice Assistant Card remains dark glass for AI contrast */
 .kira-assistant-card {
-  background: rgba(15, 23, 42, 0.78) !important;
+  background: rgba(15, 23, 42, 0.85) !important;
   backdrop-filter: blur(20px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
   border: 1px solid rgba(0, 242, 254, 0.35) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 242, 254, 0.25) !important;
   color: #f8fafc !important;
   border-radius: 24px !important;
-}
-
-.hero-card h2,
-.apple-about-card h2,
-.skills-card h2,
-.projects-card h2 {
-  color: #ffffff !important;
-  text-shadow: 0 0 20px rgba(0, 242, 254, 0.4), 0 2px 10px rgba(0, 0, 0, 0.8) !important;
-}
-
-.hero-card p,
-.apple-about-card p,
-.skills-card p,
-.projects-card p {
-  color: #cbd5e1 !important;
-}
-
-.hero-card .badge,
-.apple-about-card .badge,
-.skills-card .badge,
-.projects-card .badge {
-  background: rgba(0, 242, 254, 0.15) !important;
-  color: #00f2fe !important;
-  border: 1px solid rgba(0, 242, 254, 0.4) !important;
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3) !important;
-}
-
-.hero-card .hero-click-btn,
-.apple-about-card .hero-click-btn,
-.projects-card .hero-click-btn,
-.skills-card .explore-skills-btn {
-  background: linear-gradient(135deg, #00f2fe 0%, #3b82f6 50%, #7c3aed 100%) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  box-shadow: 0 8px 25px rgba(0, 242, 254, 0.35), 0 0 15px rgba(59, 130, 246, 0.3) !important;
 }
 
 /* Desktop Footer Social Row Override: Hide duplicate social icons on desktop view (> 768px) */
