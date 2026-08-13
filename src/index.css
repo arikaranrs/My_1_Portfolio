@@ -5864,7 +5864,7 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
-  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
+  /* 80+ FPS GPU Hardware Compositing & Layout Containment Engine */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5874,10 +5874,15 @@ body.loading-locked {
   .experience-card,
   .apple-about-card,
   .project-slab-card,
-  .skill-glass-card {
+  .skill-glass-card,
+  .kira-assistant-card {
     position: relative !important;
-    transform: translateZ(0) !important;
-    -webkit-transform: translateZ(0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    contain: layout style !important;
+    will-change: transform !important;
     margin: 0 auto !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -5887,9 +5892,11 @@ body.loading-locked {
     height: auto !important;
     padding: clamp(0.9rem, 3.5vw, 1.4rem) !important;
     box-sizing: border-box !important;
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
   }
 
-  /* 3. Fluid Typography Scaling for Mobile Screens */
+  /* Fluid Typography Scaling for Mobile Screens */
   .card-3d h2 {
     font-size: clamp(1.25rem, 4.5vw, 1.75rem) !important;
     line-height: 1.25 !important;
@@ -5898,24 +5905,6 @@ body.loading-locked {
   .card-3d p {
     font-size: clamp(0.72rem, 3vw, 0.85rem) !important;
     line-height: 1.45 !important;
-  }
-
-  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
-  .card-3d,
-  .hero-card,
-  .skills-card,
-  .projects-card,
-  .voice-card,
-  .contact-card,
-  .experience-card,
-  .apple-about-card,
-  .project-slab-card,
-  .skill-glass-card {
-    transform: translateZ(0) !important;
-    -webkit-transform: translateZ(0) !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    will-change: transform !important;
   }
 
   /* =========================================================================
