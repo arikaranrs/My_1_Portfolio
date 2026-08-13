@@ -5956,24 +5956,31 @@ body.loading-locked {
     margin: 0 auto !important;
     box-sizing: border-box !important;
     pointer-events: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
   }
 
   /* VCodez (Card 1 / exp-face-0): Alternating Slide-In from LEFT */
   .experience-card.card-3d.exp-dice-face.exp-face-0 {
     animation: mobileSlideInFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
     will-change: transform, opacity !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   /* Digitalytic (Card 2 / exp-face-1): Alternating Slide-In from RIGHT */
   .experience-card.card-3d.exp-dice-face.exp-face-1 {
     animation: mobileSlideInFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards !important;
     will-change: transform, opacity !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   @keyframes mobileSlideInFromLeft {
     0% {
-      opacity: 0;
-      transform: translate3d(-70px, 0, 0) rotateY(-12deg) scale(0.94);
+      opacity: 0.85;
+      transform: translate3d(-40px, 0, 0) rotateY(-8deg) scale(0.96);
     }
     100% {
       opacity: 1;
@@ -5983,8 +5990,8 @@ body.loading-locked {
 
   @keyframes mobileSlideInFromRight {
     0% {
-      opacity: 0;
-      transform: translate3d(70px, 0, 0) rotateY(12deg) scale(0.94);
+      opacity: 0.85;
+      transform: translate3d(40px, 0, 0) rotateY(8deg) scale(0.96);
     }
     100% {
       opacity: 1;
