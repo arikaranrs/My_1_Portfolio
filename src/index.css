@@ -5938,18 +5938,100 @@ body.loading-locked {
     will-change: transform !important;
   }
 
-  /* 3. Button & Form Alignment for Mobile Touch Targets */
-  .hero-click-btn,
-  .explore-skills-btn,
-  .contact-submit-btn-ref,
-  .kira-send-btn {
-    width: 100% !important;
-    max-width: 280px !important;
-    margin: 0.8rem auto 0 auto !important;
-    padding: 0.75rem 1.4rem !important;
-    font-size: clamp(0.78rem, 3.2vw, 0.88rem) !important;
-    border-radius: 30px !important;
+  /* 5. KIRA Voice AI Assistant Card Mobile Alignment & Overlap Fix */
+  .kira-assistant-card {
+    width: clamp(280px, 88vw, 360px) !important;
+    max-width: 92vw !important;
+    height: auto !important;
+    margin: 0 auto 1.5rem auto !important;
+    padding: clamp(0.9rem, 3.5vw, 1.25rem) !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .kira-card-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+  }
+
+  .kira-lang-select {
+    width: 100% !important;
+    max-width: 220px !important;
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.6rem !important;
+    margin-top: 0.2rem !important;
+  }
+
+  .kira-orb-container {
+    width: 85px !important;
+    height: 85px !important;
+    margin: 0.3rem auto !important;
+  }
+
+  .kira-chat-history {
+    width: 100% !important;
+    max-height: 180px !important;
+    min-height: 100px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0.6rem !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin: 0.2rem 0 !important;
+  }
+
+  .kira-chat-msg {
+    max-width: 88% !important;
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+    padding: 0.45rem 0.75rem !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  .kira-input-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .kira-text-input {
+    flex: 1 1 auto !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    font-size: 0.76rem !important;
+    padding: 0.5rem 0.75rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .kira-mic-btn,
+  .kira-send-btn {
+    flex-shrink: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .kira-privacy-note {
+    font-size: 0.62rem !important;
+    margin-top: 0.2rem !important;
+    text-align: center !important;
   }
 
   /* 4. Fluid Typography Alignment inside Cards */
