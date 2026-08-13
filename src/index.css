@@ -5850,82 +5850,6 @@ body.loading-locked {
    preventing horizontal scroll, and scaling elements proportionally.
    ========================================================================= */
 
-/* =========================================================================
-   WARM WHITE & LIGHT GOLD REFLECTING GLASS CARD SYSTEM
-   Perfectly harmonizes cards with the warm white & light gold WebGL 3D Canvas
-   ========================================================================= */
-
-.hero-card,
-.apple-about-card,
-.skills-card,
-.projects-card,
-.voice-card,
-.contact-card,
-.experience-card {
-  background: rgba(253, 251, 247, 0.94) !important;
-  backdrop-filter: blur(16px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
-  border: 1px solid rgba(200, 157, 108, 0.4) !important;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18), 0 0 25px rgba(212, 175, 55, 0.22) !important;
-  color: #0f172a !important;
-  border-radius: 24px !important;
-}
-
-/* Headings inside Warm White Gold Cards: Dark Indigo Navy */
-.hero-card h2,
-.apple-about-card h2,
-.skills-card h2,
-.projects-card h2,
-.contact-card h2 {
-  color: #0f172a !important;
-  text-shadow: none !important;
-  font-weight: 900 !important;
-}
-
-/* Body Text: High-Contrast Dark Slate */
-.hero-card p,
-.apple-about-card p,
-.skills-card p,
-.projects-card p,
-.contact-card p {
-  color: #334155 !important;
-  font-weight: 600 !important;
-}
-
-/* Badges: Light Gold Accent */
-.hero-card .badge,
-.apple-about-card .badge,
-.skills-card .badge,
-.projects-card .badge {
-  background: rgba(200, 157, 108, 0.18) !important;
-  color: #9a6b32 !important;
-  border: 1px solid rgba(200, 157, 108, 0.45) !important;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25) !important;
-  font-weight: 800 !important;
-}
-
-/* Click Buttons: Warm Gold Gradient */
-.hero-card .hero-click-btn,
-.apple-about-card .hero-click-btn,
-.projects-card .hero-click-btn,
-.skills-card .explore-skills-btn {
-  background: linear-gradient(135deg, #c89d6c 0%, #3b82f6 50%, #0f172a 100%) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  box-shadow: 0 8px 25px rgba(200, 157, 108, 0.4) !important;
-}
-
-/* KIRA AI Voice Assistant Card remains dark glass for AI contrast */
-.kira-assistant-card {
-  background: rgba(15, 23, 42, 0.85) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1px solid rgba(0, 242, 254, 0.35) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 242, 254, 0.25) !important;
-  color: #f8fafc !important;
-  border-radius: 24px !important;
-}
-
 /* Desktop Footer Social Row Override: Hide duplicate social icons on desktop view (> 768px) */
 .mobile-footer-social-row {
   display: none !important;
@@ -5972,56 +5896,46 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
-  /* 1. Mobile Root Containers: Full Touch Scroll Height & Touch Gesture Tracking for 3D Camera Navigation across all 6 Cards */
+  /* 1. Restore Full 600vh Scroll Height on Mobile so All 6 Cards are Accessible */
   html, 
   body, 
   #root {
-    height: auto !important;
-    min-height: 100vh !important;
+    height: 100% !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
+    scroll-snap-type: y mandatory !important;
     -webkit-overflow-scrolling: touch !important;
-    touch-action: pan-y !important;
     scroll-behavior: smooth !important;
+    scrollbar-width: none !important;
+  }
+
+  .content {
+    height: 600vh !important; /* 6 full-screen sections for 6 cards */
+    height: 600svh !important;
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
     background: transparent !important;
     background-color: transparent !important;
   }
 
-  /* Full 600vh scroll range with touch-action enabled so mobile thumb swipes scroll through all 6 cards */
-  .content {
-    height: 600vh !important;
-    position: relative !important;
-    pointer-events: auto !important;
-    touch-action: pan-y !important;
-    display: block !important;
-    z-index: 2 !important;
+  .content section {
+    height: 100vh !important;
+    height: 100svh !important;
+    width: 100% !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
   }
 
-  /* 2. Hide Mobile Scrollbars for Clean Interface */
+  /* 2. Hide Mobile Scrollbars */
   html::-webkit-scrollbar,
   body::-webkit-scrollbar,
-  #root::-webkit-scrollbar {
+  #root::-webkit-scrollbar,
+  .content::-webkit-scrollbar {
     display: none !important;
   }
 
-  /* 3. Mobile Card Wrapper 100% Transparency */
-  .mobile-static-portfolio-wrapper {
-    background: transparent !important;
-    background-color: transparent !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: clamp(2.5rem, 6vh, 5rem) !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    position: relative !important;
-    z-index: 10 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 4. Force 100% Visibility, GPU Compositing & Clean Spacing for All 6 Cards */
-  #canvas-container > div,
+  /* 3. Card Container Sizing & Glass Transparency */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -6031,15 +5945,10 @@ body.loading-locked {
   .experience-card,
   .kira-assistant-card,
   .apple-about-card {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    touch-action: auto !important;
-    z-index: 100 !important;
     width: clamp(280px, 88vw, 360px) !important;
     max-width: 92vw !important;
     min-height: auto !important;
-    margin: 0 auto 1.5rem auto !important;
+    margin: 0 auto !important;
     padding: clamp(1rem, 4vw, 1.4rem) !important;
     box-sizing: border-box !important;
     position: relative !important;
