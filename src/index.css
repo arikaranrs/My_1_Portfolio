@@ -5850,6 +5850,17 @@ body.loading-locked {
    preventing horizontal scroll, and scaling elements proportionally.
    ========================================================================= */
 
+/* Desktop Footer Social Row Override: Hide duplicate social icons on desktop view (> 768px) */
+.mobile-footer-social-row {
+  display: none !important;
+}
+
+@media (min-width: 769px) {
+  .mobile-footer-social-row {
+    display: none !important;
+  }
+}
+
 /* Lock WebGL Cinematic Background Canvas to Fixed Layer Behind DOM */
 #canvas-container {
   position: fixed !important;
