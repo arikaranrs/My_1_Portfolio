@@ -5864,7 +5864,7 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
-  /* 80+ FPS GPU Hardware Compositing & Layout Containment Engine */
+  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5874,15 +5874,10 @@ body.loading-locked {
   .experience-card,
   .apple-about-card,
   .project-slab-card,
-  .skill-glass-card,
-  .kira-assistant-card {
+  .skill-glass-card {
     position: relative !important;
-    transform: translate3d(0, 0, 0) !important;
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    contain: layout style !important;
-    will-change: transform !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
     margin: 0 auto !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -5892,11 +5887,9 @@ body.loading-locked {
     height: auto !important;
     padding: clamp(0.9rem, 3.5vw, 1.4rem) !important;
     box-sizing: border-box !important;
-    backdrop-filter: blur(8px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
   }
 
-  /* Fluid Typography Scaling for Mobile Screens */
+  /* 3. Fluid Typography Scaling for Mobile Screens */
   .card-3d h2 {
     font-size: clamp(1.25rem, 4.5vw, 1.75rem) !important;
     line-height: 1.25 !important;
@@ -5907,43 +5900,77 @@ body.loading-locked {
     line-height: 1.45 !important;
   }
 
+  /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
+  .card-3d,
+  .hero-card,
+  .skills-card,
+  .projects-card,
+  .voice-card,
+  .contact-card,
+  .experience-card,
+  .apple-about-card,
+  .project-slab-card,
+  .skill-glass-card {
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    will-change: transform !important;
+  }
+
   /* =========================================================================
-     SAFE MOBILE VERTICAL STACKING FIX FOR INTERNSHIP EXPERIENCE CARDS
-     Target: Experience Carousel Section ONLY (.exp-dice-container / .exp-dice-face)
+     MOBILE RESPONSIVE 3D ROTATING DICE SYSTEM (VCodez & Shiash Data Analytics)
+     Target: Experience Cards ONLY on Mobile (@media max-width: 768px)
      ========================================================================= */
   .exp-hero-carousel-container.exp-dice-container {
     display: flex !important;
-    flex-direction: column !important;
+    justify-content: center !important;
     align-items: center !important;
-    gap: 2.5rem !important;
+    perspective: 1000px !important;
+    -webkit-perspective: 1000px !important;
     width: 100% !important;
     height: auto !important;
-    overflow: visible !important;
+    min-height: 380px !important;
+    margin: 0.5rem auto !important;
+    position: relative !important;
+    touch-action: pan-y !important;
+    pointer-events: auto !important;
   }
 
   .exp-cards-track.exp-dice-track {
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 2.5rem !important;
-    width: 100% !important;
+    position: relative !important;
+    width: clamp(280px, 88vw, 360px) !important;
     height: auto !important;
-    transform: none !important;
-    transition: none !important;
+    min-height: 360px !important;
+    transform-style: preserve-3d !important;
+    -webkit-transform-style: preserve-3d !important;
+    margin: 0 auto !important;
   }
 
   .experience-card.card-3d.exp-dice-face {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    width: 90vw !important;
-    max-width: 400px !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: 360px !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
-    transform: none !important;
-    opacity: 1 !important;
-    filter: none !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
     pointer-events: auto !important;
+    opacity: 1 !important;
+  }
+
+  /* 3D Dice Face Position & Rotation Layout */
+  .experience-card.exp-face-0 {
+    transform: rotateY(0deg) translateZ(160px) !important;
+    -webkit-transform: rotateY(0deg) translateZ(160px) !important;
+  }
+
+  .experience-card.exp-face-1 {
+    transform: rotateY(90deg) translateZ(160px) !important;
+    -webkit-transform: rotateY(90deg) translateZ(160px) !important;
   }
 
   /* Universal Text Overflow Prevention & Word Wrap for Mobile Foreground Cards */
