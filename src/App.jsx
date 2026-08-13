@@ -350,7 +350,7 @@ const EXPERIENCE_CARDS = [
   }
 ];
 
-function Experience3DCarousel() {
+function Experience3DCarousel({ onExperienceWarpTrigger }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -470,8 +470,20 @@ function Experience3DCarousel() {
                 </div>
               </div>
 
-              {/* Tap to switch hint for active card */}
+              {/* Tap to switch hint for active card & Click Here Warp Button */}
               <div className="exp-card-footer-controls">
+                <button
+                  className="hero-click-btn exp-click-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onExperienceWarpTrigger) {
+                      onExperienceWarpTrigger(e);
+                    }
+                  }}
+                >
+                  Click Here
+                </button>
+
                 <div className="exp-dots-indicator">
                   <span 
                     className={`exp-dot ${activeIndex === 0 ? 'active' : ''}`}
@@ -482,8 +494,9 @@ function Experience3DCarousel() {
                     onClick={(e) => { e.stopPropagation(); setActiveIndex(1); }}
                   />
                 </div>
+
                 <span className="exp-tap-hint" onClick={toggleCard}>
-                  <span className="exp-hint-text">{isCurrent ? 'Swipe or Tap to Roll Dice' : 'Tap to View'}</span>
+                  <span className="exp-hint-text">{isCurrent ? 'Roll Dice' : 'Tap'}</span>
                   <span className="exp-hint-icon">🎲</span>
                 </span>
               </div>
@@ -1614,7 +1627,13 @@ function HelicalWorld({ scrollState, loadingState, onWarpTrigger, onProjectsWarp
               pointerEvents="auto"
             >
               {sec.isExperienceCarousel ? (
-                <Experience3DCarousel />
+                <Experience3DCarousel 
+                  onExperienceWarpTrigger={(e) => {
+                    playExplosion(() => {
+                      setCurrentPage("about");
+                    }, e, true);
+                  }}
+                />
               ) : sec.id === 'voice' ? (
                 <KiraAssistantCard />
               ) : sec.isContact ? (

@@ -3126,6 +3126,26 @@ body.loading-locked {
   text-shadow: none !important;
 }
 
+.exp-click-btn {
+  font-size: 0.7rem !important;
+  padding: 0.3rem 0.8rem !important;
+  margin: 0 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #818cf8 100%) !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4) !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.exp-click-btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.6) !important;
+}
+
 /* Footer Navigation Controls (STRICTLY CONTAINED INSIDE CARD & ZERO CLIPPING) */
 .exp-card-footer-controls {
   display: flex !important;
