@@ -5896,7 +5896,7 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
-  /* 1. Mobile Root Containers: Full Touch Scroll Height for 3D Camera Navigation across all 6 Cards */
+  /* 1. Mobile Root Containers: Full Touch Scroll Height & Touch Gesture Tracking for 3D Camera Navigation across all 6 Cards */
   html, 
   body, 
   #root {
@@ -5905,17 +5905,20 @@ body.loading-locked {
     overflow-x: hidden !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
     scroll-behavior: smooth !important;
     background: transparent !important;
     background-color: transparent !important;
   }
 
-  /* Full 600vh scroll range allowing touch scroll to navigate through all 6 cards */
+  /* Full 600vh scroll range with touch-action enabled so mobile thumb swipes scroll through all 6 cards */
   .content {
     height: 600vh !important;
     position: relative !important;
-    pointer-events: none !important;
+    pointer-events: auto !important;
+    touch-action: pan-y !important;
     display: block !important;
+    z-index: 2 !important;
   }
 
   /* 2. Hide Mobile Scrollbars for Clean Interface */
@@ -5942,6 +5945,7 @@ body.loading-locked {
   }
 
   /* 4. Force 100% Visibility, GPU Compositing & Clean Spacing for All 6 Cards */
+  #canvas-container > div,
   .card-3d,
   .hero-card,
   .skills-card,
@@ -5954,6 +5958,8 @@ body.loading-locked {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
+    touch-action: auto !important;
+    z-index: 100 !important;
     width: clamp(280px, 88vw, 360px) !important;
     max-width: 92vw !important;
     min-height: auto !important;
