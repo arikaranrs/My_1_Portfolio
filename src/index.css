@@ -5901,27 +5901,31 @@ body.loading-locked {
    ========================================================================= */
 
 @media (max-width: 768px) {
-  /* 1. Mobile Document Root: Allow full 600vh GSAP ScrollTrigger range */
+  /* 1. Mobile Document Root: Native Touch Pan-Y Scrolling across full 600vh range */
   html, 
   body, 
   #root {
     width: 100% !important;
     max-width: 100vw !important;
+    height: auto !important;
+    min-height: 100vh !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
     background: transparent !important;
     background-color: transparent !important;
   }
 
-  /* 2. Scroll Document Overlay: Must be 600vh to advance GSAP 3D camera across all 6 cards */
+  /* 2. Scroll Document Overlay: Captures touch swipe gestures to advance GSAP 3D camera across all 6 cards */
   .content {
     height: 600vh !important;
     height: 600svh !important;
     width: 100% !important;
-    pointer-events: none !important;
+    pointer-events: auto !important;
+    touch-action: pan-y !important;
     position: relative !important;
     z-index: 2 !important;
   }
@@ -5930,7 +5934,8 @@ body.loading-locked {
     height: 100vh !important;
     height: 100svh !important;
     width: 100% !important;
-    pointer-events: none !important;
+    pointer-events: auto !important;
+    touch-action: pan-y !important;
   }
 
   /* 3. Hide Mobile Scrollbars for Clean App-Like Interface */
