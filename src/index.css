@@ -5896,41 +5896,77 @@ body.loading-locked {
 }
 
 @media (max-width: 768px) {
-  /* Dynamic Viewport-Aware Responsive Cards for Mobile */
+  /* 1. Prevent Card Collapsing & Enforce Dynamic Viewport Alignment */
   .card-3d,
   .hero-card,
   .skills-card,
   .projects-card,
+  .voice-card,
+  .contact-card,
   .experience-card,
   .kira-assistant-card,
-  .contact-card {
-    position: relative !important;
-    transform: translateZ(0) !important;
-    -webkit-transform: translateZ(0) !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    margin: 0 auto !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 10 !important;
-    width: clamp(280px, 88vw, 420px) !important;
+  .apple-about-card {
+    width: clamp(280px, 88vw, 360px) !important;
     max-width: 92vw !important;
-    height: auto !important;
-    padding: clamp(0.9rem, 3.5vw, 1.4rem) !important;
+    min-height: auto !important;
+    margin: 0 auto 1.5rem auto !important;
+    padding: clamp(1rem, 4vw, 1.4rem) !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* 2. Glassmorphism Transparency & 60fps GPU Compositing */
+  .card-3d,
+  .experience-card.card-3d.exp-dice-face,
+  .apple-about-card.liquid-crystal-card,
+  .project-slab-card,
+  .skill-glass-card,
+  .kira-assistant-card {
+    background: rgba(15, 23, 42, 0.65) !important;
+    backdrop-filter: blur(12px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.15) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    will-change: transform !important;
+  }
+
+  /* 3. Button & Form Alignment for Mobile Touch Targets */
+  .hero-click-btn,
+  .explore-skills-btn,
+  .contact-submit-btn-ref,
+  .kira-send-btn {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0.8rem auto 0 auto !important;
+    padding: 0.75rem 1.4rem !important;
+    font-size: clamp(0.78rem, 3.2vw, 0.88rem) !important;
+    border-radius: 30px !important;
     box-sizing: border-box !important;
   }
 
-  /* 3. Fluid Typography Scaling for Mobile Screens */
+  /* 4. Fluid Typography Alignment inside Cards */
   .card-3d h2 {
-    font-size: clamp(1.25rem, 4.5vw, 1.75rem) !important;
+    font-size: clamp(1.3rem, 5vw, 1.7rem) !important;
     line-height: 1.25 !important;
+    margin-bottom: 0.5rem !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
   }
 
   .card-3d p {
-    font-size: clamp(0.72rem, 3vw, 0.85rem) !important;
+    font-size: clamp(0.74rem, 3.2vw, 0.84rem) !important;
     line-height: 1.45 !important;
+    margin-bottom: 0.8rem !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
   }
 
   /* Promote Foreground DOM Cards to Dedicated Hardware GPU Layers */
